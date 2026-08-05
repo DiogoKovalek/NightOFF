@@ -47,16 +47,13 @@ public class InputManager : MonoBehaviour {
         }
 
         moveDirection = transformVector2InMoveDirection(vetor);
-        Debug.Log(moveDirection);
     }
     public void OnPrimaryTouch(InputValue value) {
         if (value.isPressed && !isPressed) { // Iniciou o toque
-            Debug.Log("Tocou");
             isPressed = true;
             startPosition = touchPositionAction.ReadValue<Vector2>();
         }
         else if(!value.isPressed && isPressed){ // Finalizou o toque
-            Debug.Log("Soltou");
             isPressed = false;
             endPosition = touchPositionAction.ReadValue<Vector2>();
             checkSwipe();
@@ -86,6 +83,5 @@ public class InputManager : MonoBehaviour {
         if(direction.magnitude < distForSwipe) return;
 
         moveDirection = transformVector2InMoveDirection(direction.normalized);
-        Debug.Log(moveDirection);
     }
 }
