@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    [Header("Sprite Player")]
+    #region Sprite Player
+    [SerializeField] private GameObject playerSprite;
+    [SerializeField] private float jumpHeight = 0.5f;
+    private Vector2 playerSpriteInitialPos = new Vector2(0, 0.25f);
+    #endregion
+
+    [Header("Movement Varibles")]
     #region Movement
     [SerializeField] private float distPoints = 1; // Distancia entre cada centro do quadrado para o player ficar no centro
     [SerializeField] private float speedMovement = 8;
     private bool isMoving = false;
     private Vector2 targetMove;
+    private Vector2 startMovePos;
     #endregion
-
-    void Start() {
-
-    }
     void Update() {
         //Movement
         byte direction = InputManager.inputManager.GetMoveDirection();
@@ -42,12 +47,22 @@ public class Player : MonoBehaviour {
             default: // NONE
                 return;
         }
+        startMovePos = transform.position;
         isMoving = true;
     }
     private void movement() {
-        transform.position = Vector2.MoveTowards(transform.position, targetMove, speedMovement*Time.deltaTime);
-        if((Vector2) transform.position == targetMove) {
+        transform.position = Vector2.MoveTowards(transform.position, targetMove, speedMovement * Time.deltaTime);
+        
+        float distanceCovered = Vector2.Distance(startMovePos, transform.position);
+        float progress = distanceCovered / distPoints;
+
+        float currentJumpHeight = 4f * jumpHeight * progress * (1f - progress);
+
+        playerSprite.transform.localPosition = playerSpriteInitialPos + new Vector2(0, currentJumpHeight);
+
+        if ((Vector2)transform.position == targetMove) {
             isMoving = false;
+            playerSprite.transform.localPosition = playerSpriteInitialPos;
         }
     }
 }
