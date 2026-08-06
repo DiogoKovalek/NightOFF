@@ -23,6 +23,13 @@ public class Player : MonoBehaviour {
     private Vector2 targetMove;
     private Vector2 startMovePos;
     #endregion
+
+    #region EVENTS
+    public delegate void CollectedAnything(ICollect collect);
+    public event CollectedAnything collectedAnything;
+    public delegate void InteractedAnything(IInteract interact);
+    public event InteractedAnything interactedAnything;
+    #endregion
     void Awake() {
         if(playerSprite != null) {
             playerSpriteRender = playerSprite.GetComponent<SpriteRenderer>();
@@ -89,7 +96,14 @@ public class Player : MonoBehaviour {
         Vector2 direction = (targetMove - (Vector2) transform.position). normalized;
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, direction, distPoints, collisionLayer);
         
-        return hit.collider != null;
+        if(hit.collider != null) {
+            IInteract interact = hit.collider.GetComponent<IInteract>();
+            if(interact != null) {
+                interactedAnything?.Invoke(interact);
+            }
+            return true;
+        }
+        return false;
     }
     
 }
