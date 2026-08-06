@@ -2376,6 +2376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b2f217be539364980ad7621aed09a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 192
   playerSprite: {fileID: 598285731}
   jumpHeight: 0.5
   distPoints: 1

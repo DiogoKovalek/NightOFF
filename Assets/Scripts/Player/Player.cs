@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    [Header("Collision")]
+    [SerializeField] private LayerMask collisionLayer;
     [Header("Sprite Player")]
     #region Sprite Player
     [SerializeField] private GameObject playerSprite;
@@ -38,10 +40,6 @@ public class Player : MonoBehaviour {
             movement();
         }
     }
-    void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(targetMove, 0.1f);
-    }
     private void defineTargetForMove(byte direction) {
         switch (direction) {
             case 1: // UP
@@ -63,7 +61,10 @@ public class Player : MonoBehaviour {
             default: // NONE
                 return;
         }
-        if(isColision(targetMove)) return;
+        if (isColision(targetMove)) {
+            targetMove = (Vector2) transform.position;
+            return;
+        }
         startMovePos = transform.position;
         isMoving = true;
         playerAnimator.SetBool("isJumping", true);
@@ -85,10 +86,10 @@ public class Player : MonoBehaviour {
         }
     }
     private bool isColision(Vector2 point) {
-        Collider2D collider = Physics2D.OverlapCircle(point, 0.1f, (1 << 6) | (1 << 7));
+        Vector2 direction = (targetMove - (Vector2) transform.position). normalized;
+        RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, direction, distPoints, collisionLayer);
         
-        
-        return collider != null;
+        return hit.collider != null;
     }
     
 }
