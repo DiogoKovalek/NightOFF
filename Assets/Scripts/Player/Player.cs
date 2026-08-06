@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -7,7 +8,7 @@ public class Player : MonoBehaviour {
     #region Sprite Player
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private float jumpHeight = 0.5f;
-    private Vector2 playerSpriteInitialPos = new Vector2(0, 0.25f);
+    private Vector2 playerSpriteInitialPos = new Vector2(0, -0.25f);
     private SpriteRenderer playerSpriteRender;
     private Animator playerAnimator;
     #endregion
@@ -37,7 +38,10 @@ public class Player : MonoBehaviour {
             movement();
         }
     }
-
+    void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(targetMove, 0.1f);
+    }
     private void defineTargetForMove(byte direction) {
         switch (direction) {
             case 1: // UP
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour {
             default: // NONE
                 return;
         }
+        if(isColision(targetMove)) return;
         startMovePos = transform.position;
         isMoving = true;
         playerAnimator.SetBool("isJumping", true);
@@ -79,4 +84,11 @@ public class Player : MonoBehaviour {
             playerSprite.transform.localPosition = playerSpriteInitialPos;
         }
     }
+    private bool isColision(Vector2 point) {
+        Collider2D collider = Physics2D.OverlapCircle(point, 0.1f, (1 << 6) | (1 << 7));
+        
+        
+        return collider != null;
+    }
+    
 }
