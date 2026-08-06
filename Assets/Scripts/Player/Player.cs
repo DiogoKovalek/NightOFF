@@ -61,6 +61,7 @@ public class Player : MonoBehaviour {
         }
         startMovePos = transform.position;
         isMoving = true;
+        playerAnimator.SetBool("isJumping", true);
     }
     private void movement() {
         transform.position = Vector2.MoveTowards(transform.position, targetMove, speedMovement * Time.deltaTime);
@@ -74,6 +75,7 @@ public class Player : MonoBehaviour {
 
         if ((Vector2)transform.position == targetMove) {
             isMoving = false;
+            playerAnimator.SetBool("isJumping", false);
             playerSprite.transform.localPosition = playerSpriteInitialPos;
         }
     }
