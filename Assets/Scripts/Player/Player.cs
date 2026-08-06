@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private float jumpHeight = 0.5f;
     private Vector2 playerSpriteInitialPos = new Vector2(0, 0.25f);
+    private SpriteRenderer playerSpriteRender;
+    private Animator playerAnimator;
     #endregion
 
     [Header("Movement Varibles")]
@@ -18,6 +20,12 @@ public class Player : MonoBehaviour {
     private Vector2 targetMove;
     private Vector2 startMovePos;
     #endregion
+    void Awake() {
+        if(playerSprite != null) {
+            playerSpriteRender = playerSprite.GetComponent<SpriteRenderer>();
+            playerAnimator = playerSprite.GetComponent<Animator>();
+        }
+    }
     void Update() {
         //Movement
         byte direction = InputManager.inputManager.GetMoveDirection();
@@ -34,15 +42,19 @@ public class Player : MonoBehaviour {
         switch (direction) {
             case 1: // UP
                 targetMove = (Vector2)transform.position + new Vector2(0, distPoints);
+                playerSpriteRender.flipX = true; 
                 break;
             case 2: // RIGHT
                 targetMove = (Vector2)transform.position + new Vector2(distPoints, 0);
+                playerSpriteRender.flipX = true;
                 break;
             case 3: // DOWN
                 targetMove = (Vector2)transform.position + new Vector2(0, -distPoints);
+                playerSpriteRender.flipX = false;
                 break;
             case 4: // LEFT
                 targetMove = (Vector2)transform.position + new Vector2(-distPoints, 0);
+                playerSpriteRender.flipX = false;
                 break;
             default: // NONE
                 return;
