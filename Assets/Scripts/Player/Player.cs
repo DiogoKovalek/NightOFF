@@ -29,6 +29,8 @@ public class Player : MonoBehaviour {
     public event CollectedAnything collectedAnything;
     public delegate void InteractedAnything(IInteract interact);
     public event InteractedAnything interactedAnything;
+    public delegate void PlayerMoved();
+    public event PlayerMoved playerMoved;
     #endregion
     void Awake() {
         if(playerSprite != null) {
@@ -81,6 +83,7 @@ public class Player : MonoBehaviour {
         startMovePos = transform.position;
         isMoving = true;
         playerAnimator.SetBool("isJumping", true);
+        playerMoved?.Invoke();
     }
     private void movement() {
         transform.position = Vector2.MoveTowards(transform.position, targetMove, speedMovement * Time.deltaTime);
