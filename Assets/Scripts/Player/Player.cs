@@ -47,6 +47,12 @@ public class Player : MonoBehaviour {
             movement();
         }
     }
+    void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.layer == 8) {
+            ICollect collect = collision.GetComponent<ICollect>();
+            collectedAnything?.Invoke(collect);
+        }
+    }
     private void defineTargetForMove(byte direction) {
         switch (direction) {
             case 1: // UP
@@ -105,5 +111,6 @@ public class Player : MonoBehaviour {
         }
         return false;
     }
+
     
 }
