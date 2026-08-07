@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Collision
+  - Computer
+  - Collect
   - 
   - 
   - 
@@ -40,4 +40,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3620118237
+    locked: 0
+  - name: Ground
+    uniqueID: 2180898759
+    locked: 0
+  - name: WalkInFront
+    uniqueID: 1324386887
+    locked: 0
+  - name: Collision
+    uniqueID: 1313435149
+    locked: 0
+  - name: Entity
+    uniqueID: 3609726855
+    locked: 0
+  - name: WalkBehind
+    uniqueID: 318409517
+    locked: 0
+  - name: Decor
+    uniqueID: 3182118501
+    locked: 0
+  - name: Filter
+    uniqueID: 3175299115
     locked: 0
