@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Player player;
 
     void Awake() {
-        
+        initEvents();
     }
 
     private void initEvents() {
