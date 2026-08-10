@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Controler : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    #region EVENTS
+    public void OnCollectAnything(ICollect collect) {
+        
+    }
+    public void OnInteractAnything(IInteract interact) {
+        
+    }
+    public void OnPlayerMove() {
+        
+    }
+    #endregion
 }

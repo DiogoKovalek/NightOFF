@@ -3134,8 +3134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f59326f278daec48b667b5d0371ccd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controler: {fileID: 0}
-  player: {fileID: 0}
+  controler: {fileID: 1242534328}
+  player: {fileID: 433632224}
 --- !u!114 &1242534328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4108,8 +4108,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 54964622}
+  - {fileID: 1242534326}
   - {fileID: 433632223}
   - {fileID: 2097742520}
   - {fileID: 390907389}
   - {fileID: 394269589}
-  - {fileID: 1242534326}

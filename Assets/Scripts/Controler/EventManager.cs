@@ -12,6 +12,8 @@ public class EventManager : MonoBehaviour
     }
 
     private void initEvents() {
-        
+        player.collectedAnything += controler.OnCollectAnything;
+        player.interactedAnything += controler.OnInteractAnything;
+        player.playerMoved += controler.OnPlayerMove;
     }
 }
