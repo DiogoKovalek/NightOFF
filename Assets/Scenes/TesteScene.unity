@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 161334542}
   - component: {fileID: 161334543}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ComplementSky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1488,7 +1488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 336903249}
   - component: {fileID: 336903250}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundDayTime3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2384,7 +2384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390907389}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2763,7 +2763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696152302}
   - component: {fileID: 696152303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundNightTime4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2847,7 +2847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793177279}
   - component: {fileID: 793177280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundDayTime2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2931,7 +2931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1079909734}
   - component: {fileID: 1079909735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundNightTime2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3015,7 +3015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140878769}
   - component: {fileID: 1140878770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ComplementSky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3098,6 +3098,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242534326}
+  - component: {fileID: 1242534328}
+  - component: {fileID: 1242534327}
   m_Layer: 0
   m_Name: Controler
   m_TagString: Untagged
@@ -3114,12 +3116,38 @@ Transform:
   m_GameObject: {fileID: 1242534325}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: -0.05908541}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1242534327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242534325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f59326f278daec48b667b5d0371ccd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controler: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &1242534328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242534325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e1453ca0bafb0449fc1f3ac0b26972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1312248931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,7 +3158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1312248932}
   - component: {fileID: 1312248933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundDayTime4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3430,7 +3458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1517579002}
   - component: {fileID: 1517579003}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundDayTime1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3513,7 +3541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643977746}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BGNight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3550,7 +3578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1653116445}
   - component: {fileID: 1653116446}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundNightTime3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3633,7 +3661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1744976800}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BGDay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3952,7 +3980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014822083}
   - component: {fileID: 2014822084}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackgroundNightTime1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
