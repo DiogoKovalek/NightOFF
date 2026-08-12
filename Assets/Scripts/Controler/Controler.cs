@@ -47,7 +47,6 @@ public class Controler : MonoBehaviour {
     }
     public void OnPlayerMove() {
         contShifts++;
-        Debug.Log(contShifts);
         if (contShifts >= numShifts) {
             countCiclesForApply++;
             contShifts = 0;
