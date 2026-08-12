@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Controler : MonoBehaviour {
     [Header("Day-Night System")]
-    [SerializeField] private readonly int numShifts = 3;
+    [SerializeField] private readonly int numShifts = 1;
     private int contShifts;
     [SerializeField] private readonly bool initDay = true;
     [SerializeField] private GameObject Background;
-    [SerializeField] private readonly float timeSecondTradeDayNight = 1;
+    [SerializeField] private readonly float timeSecondTradeDayNight = 0.15f;
+    private Coroutine coroutineTradeDayNight;
+    private byte countCiclesForApply = 0;
     void Start() {
 
     }
@@ -18,18 +20,22 @@ public class Controler : MonoBehaviour {
     }
 
     private IEnumerator tradeDayNight() {
-        Quaternion startRotation = Background.transform.rotation;
-        Quaternion endRotation = startRotation * Quaternion.Euler(0,0,180);
-        float countTime = 0;
+        while (countCiclesForApply > 0){
+            Quaternion startRotation = Background.transform.rotation;
+            Quaternion endRotation = startRotation * Quaternion.Euler(0,0,-180);
+            float countTime = 0;
 
-        while (countTime <= timeSecondTradeDayNight) {
-            countTime += Time.deltaTime;
-            float rot = countTime / timeSecondTradeDayNight;
+            while (countTime <= timeSecondTradeDayNight) {
+                countTime += Time.deltaTime;
+                float rot = countTime / timeSecondTradeDayNight;
 
-            Background.transform.rotation = Quaternion.Lerp(startRotation, endRotation, rot);
-            yield return null;
+                Background.transform.rotation = Quaternion.Lerp(startRotation, endRotation, rot);
+                yield return null;
+            }
+            Background.transform.rotation = endRotation;
+            countCiclesForApply--;
         }
-        Background.transform.rotation = endRotation;
+        coroutineTradeDayNight = null;
     }
 
     #region EVENTS
@@ -43,8 +49,9 @@ public class Controler : MonoBehaviour {
         contShifts++;
         Debug.Log(contShifts);
         if (contShifts >= numShifts) {
-            StartCoroutine(tradeDayNight());
+            countCiclesForApply++;
             contShifts = 0;
+            if(coroutineTradeDayNight == null) coroutineTradeDayNight = StartCoroutine(tradeDayNight());
         }
     }
     #endregion
