@@ -12,7 +12,7 @@ public class EventManager : MonoBehaviour
     }
 
     private void initEvents() {
-        player.collectedAnything += controler.OnCollectAnything;
+        player.collectedStar += controler.OnCollectStar;
         player.interactedAnything += controler.OnInteractAnything;
         player.playerMoved += controler.OnPlayerMove;
     }

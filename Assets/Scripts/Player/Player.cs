@@ -25,8 +25,8 @@ public class Player : MonoBehaviour {
     #endregion
 
     #region EVENTS
-    public delegate void CollectedAnything(ICollect collect);
-    public event CollectedAnything collectedAnything;
+    public delegate void CollectedStar();
+    public event CollectedStar collectedStar;
     public delegate void InteractedAnything(IInteract interact);
     public event InteractedAnything interactedAnything;
     public delegate void PlayerMoved();
@@ -51,8 +51,11 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.layer == 8) {
-            ICollect collect = collision.GetComponent<ICollect>();
-            collectedAnything?.Invoke(collect);
+            ICollect collect = collision?.GetComponent<ICollect>();
+            if(collect != null) {
+                if(collision.gameObject.CompareTag("StarCollect")) collectedStar?.Invoke();
+                collect.collected(this);
+            }
         }
     }
     private void defineTargetForMove(byte direction) {
