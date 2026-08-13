@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Controler : MonoBehaviour {
+    #region Day-Night System
     [Header("Day-Night System")]
-    [SerializeField] private readonly int numShifts = 1;
+    [SerializeField] private readonly int numShifts = 3;
     private int contShifts;
     [SerializeField] private readonly bool initDay = true;
     [SerializeField] private GameObject Background;
     [SerializeField] private readonly float timeSecondTradeDayNight = 0.15f;
     private Coroutine coroutineTradeDayNight;
     private byte countCiclesForApply = 0;
+    #endregion
+
+    #region Stars System
+    private byte countStars = 0;
+    #endregion
+
+    #region EVENTS
+    public delegate void CompleatedStarInUI(byte index);
+    public event CompleatedStarInUI compleatedStartInUI;
+    #endregion
     void Start() {
 
     }
@@ -39,8 +50,9 @@ public class Controler : MonoBehaviour {
     }
 
     #region EVENTS
-    public void OnCollectAnything(ICollect collect) {
-
+    public void OnCollectStar() {
+        countStars++;
+        compleatedStartInUI?.Invoke(countStars);
     }
     public void OnInteractAnything(IInteract interact) {
 
