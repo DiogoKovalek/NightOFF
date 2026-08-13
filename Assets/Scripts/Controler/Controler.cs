@@ -5,7 +5,7 @@ using UnityEngine;
 public class Controler : MonoBehaviour {
     #region Day-Night System
     [Header("Day-Night System")]
-    [SerializeField] private readonly int numShifts = 1;
+    [SerializeField] private readonly int numShifts = 3;
     private int contShifts;
     [SerializeField] private readonly bool initDay = true;
     [SerializeField] private GameObject Background;

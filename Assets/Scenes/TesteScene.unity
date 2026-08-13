@@ -6636,6 +6636,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34246290cc842094182bbbab8e306309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteStar: {fileID: 869033214}
+  isAnimationLerp: 1
+  rayDistLerp: 0.3
+  speedLerp: 1
 --- !u!1 &1221970132
 GameObject:
   m_ObjectHideFlags: 0
