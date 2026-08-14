@@ -12,11 +12,11 @@ public static class ManagerScenes
         Time.timeScale = 1f;
         numLevel++;
         if(scenesLevel.Length < numLevel) numLevel = 1;
-        SceneManager.LoadScene(scenesLevel[numLevel]);
+        SceneManager.LoadScene(scenesLevel[numLevel - 1]);
     }
     public static void RestartLevel() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(scenesLevel[numLevel]);
+        SceneManager.LoadScene(scenesLevel[numLevel - 1]);
     }
     public static void ExitToHomeScreen() {
         Time.timeScale = 1f;
@@ -26,6 +26,6 @@ public static class ManagerScenes
     public static void StartGame() {
         Time.timeScale = 1f;
         numLevel = 1;
-        SceneManager.LoadScene(scenesLevel[numLevel]);
+        SceneManager.LoadScene(scenesLevel[numLevel - 1]);
     }
 }

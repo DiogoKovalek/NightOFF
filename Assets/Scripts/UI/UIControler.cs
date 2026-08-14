@@ -21,8 +21,10 @@ public class UIControler : MonoBehaviour {
     }
     public void OnRestartGame() {
         Debug.Log("Restart");
+        ManagerScenes.RestartLevel();
     }
     public void OnExitGame() {
         Debug.Log("Exit");
+        ManagerScenes.ExitToHomeScreen();
     }
 }
