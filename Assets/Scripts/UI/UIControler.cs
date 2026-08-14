@@ -7,25 +7,28 @@ public class UIControler : MonoBehaviour {
     [Header("ShiftCounter")]
     [SerializeField] private GameObject shiftCounter;
     [SerializeField] private GameObject prefCounter;
-    [SerializeField] private Counter[] listCounters;
-    private float startDistCounter = 50;
-    private float spaceDistCounters = 70;
+    private Counter[] listCounters;
+    private byte numShiftsForTrade = 0;
+    private byte numShifts = 0;
     private float startLenghtRightShifitCounter = 535f;
     private float strentchShiftCounter = 70f;
     [Header("PauseMenu")]
     [SerializeField] private GameObject pauseMenu;
 
-    void Awake() {
-        createCounterByShifts(3);
-    }
-    private void createCounterByShifts(int numShifts) {
+    private void createCounterByShifts(byte numShifts) {
+        int numCounters = numShifts - 1; 
+        // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
+        //Com exexao no numShiftsForTrade = numShifts
         RectTransform rect = shiftCounter.GetComponent<RectTransform>();
-        float newValueRight = startLenghtRightShifitCounter - (strentchShiftCounter * (numShifts - 1));
+        float newValueRight = startLenghtRightShifitCounter - (strentchShiftCounter * (numCounters - 1));
         rect.offsetMax = new Vector2(-newValueRight, rect.offsetMax.y);
 
-        for (int i = 0; i < numShifts; i++) {
-            Instantiate(prefCounter, shiftCounter.transform);
+        listCounters = new Counter[numCounters];
+        for (int i = 0; i < numCounters; i++) {
+            GameObject obj = Instantiate(prefCounter, shiftCounter.transform);
+            listCounters[i] = obj.GetComponent<Counter>();
         }
+        numShiftsForTrade = numShifts;
     }
     public void OnPauseGame() {
         pauseMenu.SetActive(true);
@@ -45,4 +48,20 @@ public class UIControler : MonoBehaviour {
         Debug.Log("Exit");
         ManagerScenes.ExitToHomeScreen();
     }
+
+    #region EVENTS
+    public void OnStartCounterShifts(byte numShifts) {
+        createCounterByShifts(numShifts);
+    }
+    public void OnIncrementOneShift() {
+        numShifts++;
+        if(numShifts < numShiftsForTrade) {
+            listCounters[numShifts - 1].EnableCounter(); 
+        }
+        else {
+            foreach(var o in listCounters) o.DisableCounter();
+            numShifts = 0;
+        }
+    }
+    #endregion
 }
