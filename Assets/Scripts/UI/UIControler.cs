@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIControler : MonoBehaviour {
-    //[Header("Buttons")]
+    [Header("Stars")]
+    [SerializeField] private UIStar[] listStars;
     [Header("ShiftCounter")]
     [SerializeField] private GameObject shiftCounter;
     [SerializeField] private GameObject prefCounter;
@@ -50,6 +51,9 @@ public class UIControler : MonoBehaviour {
     }
 
     #region EVENTS
+    public void OnCompleteStarInUI(byte index) {
+        listStars[index-1].EnableStar();
+    }
     public void OnStartCounterShifts(byte numShifts) {
         createCounterByShifts(numShifts);
     }

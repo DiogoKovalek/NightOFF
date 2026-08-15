@@ -27,7 +27,7 @@ public class Controler : MonoBehaviour {
     public event IncrementedOneShift incrementedOneShift;
     #endregion
     void Start() {
-        startedCounterShifts?.Invoke((byte) numShifts);
+        startedCounterShifts?.Invoke(numShifts);
     }
 
     void Update() {

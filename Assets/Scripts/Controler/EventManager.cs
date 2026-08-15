@@ -17,6 +17,7 @@ public class EventManager : MonoBehaviour
         player.interactedAnything += controler.OnInteractAnything;
         player.playerMoved += controler.OnPlayerMove;
 
+        controler.compleatedStartInUI += uiControler.OnCompleteStarInUI;
         controler.startedCounterShifts += uiControler.OnStartCounterShifts;
         controler.incrementedOneShift += uiControler.OnIncrementOneShift;
     }
