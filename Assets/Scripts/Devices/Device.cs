@@ -20,4 +20,10 @@ public class Device : MonoBehaviour {
         isON = false;
         anim?.SetBool("isON", false);
     }
+    protected void enableCollider() {
+        collider.enabled = true;
+    }
+    protected void disbleCollider() {
+        collider.enabled = false;
+    }
 }
