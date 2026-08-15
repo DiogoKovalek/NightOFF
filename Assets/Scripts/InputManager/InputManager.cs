@@ -30,13 +30,15 @@ public class InputManager : MonoBehaviour {
         if (inputManager == null) {
             inputManager = this;
             DontDestroyOnLoad(this.gameObject);
+
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = true;
+            touchPositionAction = playerInput.actions["TouchPosition"];
         }
         else {
             Destroy(this.gameObject);
+            return;
         }
-
-        playerInput = GetComponent<PlayerInput>();
-        touchPositionAction = playerInput.actions["TouchPosition"];
     }
     public void OnMove(InputValue value) {
         Vector2 vetor = value.Get<Vector2>().normalized;

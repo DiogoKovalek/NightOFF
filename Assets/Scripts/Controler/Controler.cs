@@ -5,7 +5,7 @@ using UnityEngine;
 public class Controler : MonoBehaviour {
     #region Day-Night System
     [Header("Day-Night System")]
-    [SerializeField] private readonly int numShifts = 3;
+    [SerializeField] private readonly byte numShifts = 3;
     private int contShifts;
     [SerializeField] private readonly bool initDay = true;
     [SerializeField] private GameObject Background;
@@ -21,9 +21,13 @@ public class Controler : MonoBehaviour {
     #region EVENTS
     public delegate void CompleatedStarInUI(byte index);
     public event CompleatedStarInUI compleatedStartInUI;
+    public delegate void StartedCounterShifts(byte numShifts);
+    public event StartedCounterShifts startedCounterShifts;
+    public delegate void IncrementedOneShift();
+    public event IncrementedOneShift incrementedOneShift;
     #endregion
     void Start() {
-
+        startedCounterShifts?.Invoke(numShifts);
     }
 
     void Update() {
@@ -59,6 +63,7 @@ public class Controler : MonoBehaviour {
     }
     public void OnPlayerMove() {
         contShifts++;
+        incrementedOneShift?.Invoke();
         if (contShifts >= numShifts) {
             countCiclesForApply++;
             contShifts = 0;
