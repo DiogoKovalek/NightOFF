@@ -5,11 +5,14 @@ using UnityEngine;
 public class Device : MonoBehaviour {
     [Header("Device")]
     [SerializeField] protected new BoxCollider2D collider;
-    [SerializeField] protected Controler controler;
+    protected Controler controler;
     [SerializeField] protected Animator anim;
     [SerializeField] protected bool isActiveInDay = true;
     [SerializeField] protected bool isON = true;
     protected bool thereIsNotSomethingOnTop = true;
+    public void linkControler(Controler controler) {
+        this.controler = controler;
+    }
     public virtual void OnDeviceSwitch(bool isDay) {
         if(!(isActiveInDay ^ isDay)) enableDevice();
         else disableDevice();

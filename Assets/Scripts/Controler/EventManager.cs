@@ -25,6 +25,10 @@ public class EventManager : MonoBehaviour
         controler.startedCounterShifts += uiControler.OnStartCounterShifts;
         controler.incrementedOneShift += uiControler.OnIncrementOneShift;
 
-        foreach(var dev in listDevices) controler.deviceSwitched += dev.OnDeviceSwitch;
+
+        foreach(var dev in listDevices){
+            dev.linkControler(controler);
+            controler.deviceSwitched += dev.OnDeviceSwitch;
+        }
     }
 }
