@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class Device : MonoBehaviour {
     [Header("Device")]
-    [SerializeField] protected BoxCollider2D collider;
+    [SerializeField] protected new BoxCollider2D collider;
+    [SerializeField] protected Controler controler;
     [SerializeField] protected Animator anim;
     [SerializeField] protected bool isActiveInDay = true;
     [SerializeField] protected bool isON = true;
+    protected bool thereIsNotSomethingOnTop = true;
     public virtual void OnDeviceSwitch(bool isDay) {
         if(!(isActiveInDay ^ isDay)) enableDevice();
         else disableDevice();
     }
+    public virtual void OnUpdateDeviceInNextMove(bool isDay) {
+        StartCoroutine(delayForThereIsNotSomethingOnTop());
+        OnDeviceSwitch(isDay);
+        controler.updatedDeviceInNextMove -= this.OnUpdateDeviceInNextMove;
+    }
+    public IEnumerator delayForThereIsNotSomethingOnTop() {
+        yield return new WaitForSeconds(1f);
+        thereIsNotSomethingOnTop = true;
+    }
+    
     protected virtual void enableDevice() {
         isON = true;
         anim?.SetBool("isON", true);

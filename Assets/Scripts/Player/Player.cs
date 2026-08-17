@@ -31,6 +31,8 @@ public class Player : MonoBehaviour {
     public event InteractedAnything interactedAnything;
     public delegate void PlayerMoved();
     public event PlayerMoved playerMoved;
+    public delegate bool ThisIsLastedMovement();
+    public event ThisIsLastedMovement thisIslastedMovement;
     #endregion
     void Awake() {
         if(playerSprite != null) {
@@ -109,9 +111,13 @@ public class Player : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, direction, distPoints, collisionLayer);
         
         if(hit.collider != null) {
-            IInteract interact = hit.collider.GetComponent<IInteract>();
+            IInteract interact = hit.collider?.GetComponent<IInteract>();
             if(interact != null) {
                 interactedAnything?.Invoke(interact);
+            }
+            if(hit.collider.CompareTag("Device") && thisIslastedMovement()){
+                //É um device mas ja vai abrir
+                return false;
             }
             return true;
         }
