@@ -33,6 +33,7 @@ public class Controler : MonoBehaviour {
     #endregion
     void Start() {
         startedCounterShifts?.Invoke(numShifts);
+        deviceSwitched?.Invoke(isDay);
     }
     private IEnumerator tradeDayNight() {
         while (countCiclesForApply > 0){

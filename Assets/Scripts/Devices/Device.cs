@@ -8,7 +8,7 @@ public class Device : MonoBehaviour {
     protected Controler controler;
     [SerializeField] protected Animator anim;
     [SerializeField] protected bool isActiveInDay = true;
-    [SerializeField] protected bool isON = true;
+    protected bool isON = true;
     protected bool thereIsNotSomethingOnTop = true;
     public void linkControler(Controler controler) {
         this.controler = controler;
