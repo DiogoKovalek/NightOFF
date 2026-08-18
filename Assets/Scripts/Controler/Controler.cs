@@ -51,6 +51,7 @@ public class Controler : MonoBehaviour {
             countCiclesForApply--;
         }
         coroutineTradeDayNight = null;
+        deviceSwitched?.Invoke(isDay);
     }
 
     #region EVENTS
@@ -69,7 +70,6 @@ public class Controler : MonoBehaviour {
             countCiclesForApply++;
             contShifts = 0;
             isDay = !isDay;
-            deviceSwitched?.Invoke(isDay);
             if(coroutineTradeDayNight == null) coroutineTradeDayNight = StartCoroutine(tradeDayNight());
         }
     }

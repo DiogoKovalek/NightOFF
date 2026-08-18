@@ -6760,7 +6760,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 795762570}
-  controler: {fileID: 1242534328}
   anim: {fileID: 795762569}
   isActiveInDay: 1
   isON: 1
@@ -10626,7 +10625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1676674260}
-  controler: {fileID: 1242534328}
   anim: {fileID: 1676674259}
   isActiveInDay: 1
   isON: 1
