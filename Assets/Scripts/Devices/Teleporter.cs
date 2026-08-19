@@ -11,7 +11,7 @@ public class Teleporter : Device {
 
     void Awake() {
         // Checar se os teleportes estao linkados entre si
-        if(destinationTeleport == null || destinationTeleport?.GetDestinationTeleport() != this) {
+        if (destinationTeleport == null || destinationTeleport?.GetDestinationTeleport() != this) {
             Debug.LogError("Os teleporters nao estão linkados corretamente");
         }
     }
@@ -28,7 +28,8 @@ public class Teleporter : Device {
             if (!inAreaOfTeleport) {
                 inAreaOfTeleport = true;
                 StartCoroutine(teleportingProcess(collision));
-            }else if (inAreaOfTeleport && isInTeleportProcessing) {
+            }
+            else if (inAreaOfTeleport && isInTeleportProcessing) {
                 isTeleported = true;
             }
         }
@@ -41,44 +42,35 @@ public class Teleporter : Device {
             }
         }
     }
-    
+
     private IEnumerator teleportingProcess(Collider2D collision) {
         Player player = collision.gameObject.GetComponentInParent<Player>();
-        if(player == null) yield break;
-        if(isTeleported) yield break;
+        if (player == null) yield break;
+        if (isTeleported) yield break;
         // Seta atributos de controle
         isInTeleportProcessing = true;
-        //destinationTeleport.SetIsInTeleportProcessing(true);
-        
+        player.SetIsFreeForMove(false);
+
         while (player.GetIsMoving()) { // espera até o player para de se mover
             yield return null;
         }
 
+        Animator playerAnimator = player.GetPlayerAnimator();
         // Executa animacao de teleport
-
-        // Teleporta
-        
+        playerAnimator.SetTrigger("teleporting");
+        yield return new WaitForSeconds(0.583f);
+        // Teleporta  
         collision.transform.parent.position = GetPositionDestination();
         yield return new WaitUntil(() => isTeleported); // Tentart depois um yield return null
 
         // Executa animacao de finalizar teleport
-
+        playerAnimator.SetTrigger("teleporting");
+        yield return new WaitForSeconds(0.583f);
+        
         // Seta atributos que indicam finalizacao de teleport
         isInTeleportProcessing = false;
-        //destinationTeleport.SetIsInTeleportProcessing(false);
-
-        //ADENDO -> depois deve travar a possibilidade do player se movimentar
-        //usando um isFreeForMove
-        Debug.Log($"{gameObject.name}: Finalizou a Corrotina");
+        player.SetIsFreeForMove(true);
     }
-    /*
-    public void SetIsInTeleportProcessing(bool value) {
-        isInTeleportProcessing = value;
-    }
-    public void SetInAreaOfTeleport(bool value) {
-        inAreaOfTeleport = value;
-    }
-    */
     public Teleporter GetDestinationTeleport() {
         return destinationTeleport;
     }
