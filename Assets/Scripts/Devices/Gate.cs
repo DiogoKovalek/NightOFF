@@ -20,7 +20,7 @@ public class Gate : Device
         animatorTopGate.SetBool("isON", false);
         spriteTopGate.sortingLayerName = "WalkInFront";
         spriteBodyGate.sortingLayerName = "WalkInFront";
-        disbleCollider();
+        disableCollider();
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (thereIsNotSomethingOnTop && collision.CompareTag("Player") && !isON) {

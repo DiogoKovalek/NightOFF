@@ -38,7 +38,7 @@ public class Device : MonoBehaviour {
     protected void enableCollider() {
         collider.enabled = true;
     }
-    protected void disbleCollider() {
+    protected void disableCollider() {
         collider.enabled = false;
     }
 }

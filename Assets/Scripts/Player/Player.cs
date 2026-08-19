@@ -124,5 +124,9 @@ public class Player : MonoBehaviour {
         return false;
     }
 
+
+    public bool GetIsMoving() {
+        return isMoving;
+    }
     
 }

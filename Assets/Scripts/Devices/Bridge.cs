@@ -6,7 +6,7 @@ public class Bridge : Device {
 
     protected override void enableDevice() {
         base.enableDevice();
-        disbleCollider();
+        disableCollider();
     }
     protected override void disableDevice() {
         base.disableDevice();
