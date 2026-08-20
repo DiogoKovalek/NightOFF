@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     [Header("Sprite Player")]
     #region Sprite Player
     [SerializeField] private GameObject playerSprite;
+    [SerializeField] private GameObject playerShadow;
     [SerializeField] private float jumpHeight = 0.5f;
     private Vector2 playerSpriteInitialPos = new Vector2(0, -0.25f);
     private SpriteRenderer playerSpriteRender;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float distPoints = 1; // Distancia entre cada centro do quadrado para o player ficar no centro
     [SerializeField] private float speedMovement = 8;
     private bool isMoving = false;
+    private bool isFreeForMove = true;
     private Vector2 targetMove;
     private Vector2 startMovePos;
     #endregion
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour {
     public event InteractedAnything interactedAnything;
     public delegate void PlayerMoved();
     public event PlayerMoved playerMoved;
+    public delegate bool ThisIsLastedMovement();
+    public event ThisIsLastedMovement thisIslastedMovement;
     #endregion
     void Awake() {
         if(playerSprite != null) {
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour {
         //Movement
         byte direction = InputManager.inputManager.GetMoveDirection();
 
-        if (direction != 0 && !isMoving) {
+        if (direction != 0 && !isMoving && isFreeForMove) {
             defineTargetForMove(direction);
         }
         if (isMoving) {
@@ -109,14 +113,25 @@ public class Player : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, direction, distPoints, collisionLayer);
         
         if(hit.collider != null) {
-            IInteract interact = hit.collider.GetComponent<IInteract>();
+            IInteract interact = hit.collider?.GetComponent<IInteract>();
             if(interact != null) {
                 interactedAnything?.Invoke(interact);
+            }
+            if(hit.collider.CompareTag("Device") && thisIslastedMovement()){
+                //É um device mas ja vai abrir
+                return false;
             }
             return true;
         }
         return false;
     }
-
-    
+    public Animator GetPlayerAnimator() {
+        return playerAnimator;
+    }
+    public bool GetIsMoving() {
+        return isMoving;
+    }
+    public void SetIsFreeForMove(bool value){
+        isFreeForMove = value;
+    }
 }

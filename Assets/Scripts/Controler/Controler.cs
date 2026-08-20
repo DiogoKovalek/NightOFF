@@ -6,7 +6,8 @@ public class Controler : MonoBehaviour {
     #region Day-Night System
     [Header("Day-Night System")]
     [SerializeField] private readonly byte numShifts = 3;
-    private int contShifts;
+    private int contShifts = 0;
+    private bool isDay = true;
     [SerializeField] private readonly bool initDay = true;
     [SerializeField] private GameObject Background;
     [SerializeField] private readonly float timeSecondTradeDayNight = 0.15f;
@@ -25,15 +26,15 @@ public class Controler : MonoBehaviour {
     public event StartedCounterShifts startedCounterShifts;
     public delegate void IncrementedOneShift();
     public event IncrementedOneShift incrementedOneShift;
+    public delegate void DeviceSwitched(bool isDay);
+    public event DeviceSwitched deviceSwitched;
+    public delegate void UpdatedDeviceInNextMove(bool isDay);
+    public event UpdatedDeviceInNextMove updatedDeviceInNextMove;
     #endregion
     void Start() {
         startedCounterShifts?.Invoke(numShifts);
+        deviceSwitched?.Invoke(isDay);
     }
-
-    void Update() {
-
-    }
-
     private IEnumerator tradeDayNight() {
         while (countCiclesForApply > 0){
             Quaternion startRotation = Background.transform.rotation;
@@ -51,6 +52,7 @@ public class Controler : MonoBehaviour {
             countCiclesForApply--;
         }
         coroutineTradeDayNight = null;
+        deviceSwitched?.Invoke(isDay);
     }
 
     #region EVENTS
@@ -63,12 +65,17 @@ public class Controler : MonoBehaviour {
     }
     public void OnPlayerMove() {
         contShifts++;
+        updatedDeviceInNextMove?.Invoke(isDay);
         incrementedOneShift?.Invoke();
         if (contShifts >= numShifts) {
             countCiclesForApply++;
             contShifts = 0;
+            isDay = !isDay;
             if(coroutineTradeDayNight == null) coroutineTradeDayNight = StartCoroutine(tradeDayNight());
         }
+    }
+    public bool OnThisIsLastMovement() {
+        return contShifts == numShifts - 1;
     }
     #endregion
 }
