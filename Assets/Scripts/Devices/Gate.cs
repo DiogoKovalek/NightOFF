@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : Device
-{
+public class Gate : Device {
     [Header("Gate")]
     [SerializeField] private Animator animatorTopGate;
     [SerializeField] private SpriteRenderer spriteTopGate;
     [SerializeField] private SpriteRenderer spriteBodyGate;
+    private bool isInStayForEnable = false;
     protected override void enableDevice() { //Levantar portao
+        if (checkIfSomethingOnTop() && !isInStayForEnable) {
+            controler.updatedDeviceInNextMove += this.OnUpdateDeviceInNextMove;
+            isInStayForEnable = true;
+            return;
+        }
+        isInStayForEnable = false;
         base.enableDevice();
         animatorTopGate.SetBool("isON", true);
         spriteTopGate.sortingLayerName = "WalkBehind";
@@ -22,11 +28,8 @@ public class Gate : Device
         spriteBodyGate.sortingLayerName = "WalkInFront";
         disableCollider();
     }
-    void OnTriggerEnter2D(Collider2D collision) {
-        if (thereIsNotSomethingOnTop && collision.CompareTag("Player") && !isON) {
-            thereIsNotSomethingOnTop = false;
-            disableDevice();
-            controler.updatedDeviceInNextMove += this.OnUpdateDeviceInNextMove;
-        }
+    private bool checkIfSomethingOnTop() {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0.01f, 0, 0), Vector2.right, 0.02f, LayerMask.GetMask("Player"));
+        return hit.collider != null;
     }
 }
