@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour {
             isPressed = true;
             startPosition = touchPositionAction.ReadValue<Vector2>();
         }
-        else if(!value.isPressed && isPressed){ // Finalizou o toque
+        else if (!value.isPressed && isPressed) { // Finalizou o toque
             isPressed = false;
             endPosition = touchPositionAction.ReadValue<Vector2>();
             checkSwipe();
@@ -66,9 +66,22 @@ public class InputManager : MonoBehaviour {
         moveDirection = 0; // Sempre seta para 0 o valor do input para que nao se repita mais de uma vez
         return value;
     }
+    public void TradeActionMap(ACTION_MAP actionMap) {
+        switch (actionMap) {
+            case ACTION_MAP.PLAYER:
+                playerInput.SwitchCurrentActionMap("Player");
+                break;
+            case ACTION_MAP.PAUSE:
+                playerInput.SwitchCurrentActionMap("Pause");
+                break;
+            case ACTION_MAP.MENU:
+                playerInput.SwitchCurrentActionMap("Menu");
+                break;
+        }
+    }
 
     private byte transformVector2InMoveDirection(Vector2 vectorNormalized) {
-        if(vectorNormalized.sqrMagnitude < 0.98) {
+        if (vectorNormalized.sqrMagnitude < 0.98) {
             return 0;
         }
         byte move;
@@ -82,8 +95,14 @@ public class InputManager : MonoBehaviour {
     }
     private void checkSwipe() {
         Vector2 direction = endPosition - startPosition;
-        if(direction.magnitude < distForSwipe) return;
+        if (direction.magnitude < distForSwipe) return;
 
         moveDirection = transformVector2InMoveDirection(direction.normalized);
     }
+}
+
+public enum ACTION_MAP {
+    PLAYER,
+    PAUSE,
+    MENU
 }
