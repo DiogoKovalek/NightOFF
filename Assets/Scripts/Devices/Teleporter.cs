@@ -40,6 +40,9 @@ public class Teleporter : Device {
                 inAreaOfTeleport = false;
                 isTeleported = false;
             }
+            if (!isON) {
+                disableCollider();
+            }
         }
     }
 
@@ -55,10 +58,17 @@ public class Teleporter : Device {
             yield return null;
         }
 
-        Animator playerAnimator = player.GetPlayerAnimator();
         // Executa animacao de teleport
+        Animator playerAnimator = player.GetPlayerAnimator();
         playerAnimator.SetTrigger("teleporting");
         yield return new WaitForSeconds(0.583f);
+
+        // Se caso trocou o turno de dia para noite, reativa o colisor só para parar o teleport
+        if (!isON) {
+            thereIsNotSomethingOnTop = false;
+            destinationTeleport.enableCollider();
+        }
+
         // Teleporta  
         collision.transform.parent.position = GetPositionDestination();
         yield return new WaitUntil(() => isTeleported); // Tentart depois um yield return null
