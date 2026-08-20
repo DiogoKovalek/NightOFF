@@ -234,6 +234,18 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Pause",
+            "id": "69d0d8c6-e176-4867-92fd-82d3fca5d3b1",
+            "actions": [],
+            "bindings": []
+        },
+        {
+            "name": "Menu",
+            "id": "95201705-8dc0-4ce7-8d36-83b6f4055aaa",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

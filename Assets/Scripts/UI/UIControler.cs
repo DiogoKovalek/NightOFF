@@ -33,11 +33,13 @@ public class UIControler : MonoBehaviour {
     }
     public void OnPauseGame() {
         pauseMenu.SetActive(true);
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PAUSE);
         Time.timeScale = 0f;
         Debug.Log("Pause");
     }
     public void OnContinueGame() {
         pauseMenu.SetActive(false);
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
         Time.timeScale = 1f;
         Debug.Log("Continue");
     }
