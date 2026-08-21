@@ -73,7 +73,7 @@ public class Controler : MonoBehaviour {
         countStars++;
         compleatedStartInUI?.Invoke(countStars);
     }
-    public void OnInteractAnything(IInteract interact) {
+    public void OnInteractComputer() {
 
     }
     public void OnPlayerMove() {

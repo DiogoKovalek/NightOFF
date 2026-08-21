@@ -17,7 +17,7 @@ public class EventManager : MonoBehaviour
 
     private void initEvents() {
         player.collectedStar += controler.OnCollectStar;
-        player.interactedAnything += controler.OnInteractAnything;
+        player.interactedComputer += controler.OnInteractComputer;
         player.playerMoved += controler.OnPlayerMove;
         player.thisIslastedMovement += controler.OnThisIsLastMovement;
 

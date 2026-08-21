@@ -29,8 +29,8 @@ public class Player : MonoBehaviour {
     #region EVENTS
     public delegate void CollectedStar();
     public event CollectedStar collectedStar;
-    public delegate void InteractedAnything(IInteract interact);
-    public event InteractedAnything interactedAnything;
+    public delegate void InteractedComputer();
+    public event InteractedComputer interactedComputer;
     public delegate void PlayerMoved();
     public event PlayerMoved playerMoved;
     public delegate bool ThisIsLastedMovement();
@@ -115,7 +115,11 @@ public class Player : MonoBehaviour {
         if(hit.collider != null) {
             IInteract interact = hit.collider?.GetComponent<IInteract>();
             if(interact != null) {
-                interactedAnything?.Invoke(interact);
+                // De alguma forma o interactComputer so deve ser executado se o computador
+                // Estiver ligado
+                if(hit.collider.gameObject.CompareTag("Computer"))interactedComputer?.Invoke();
+                interact.interacted(this);
+                return true;
             }
             if(hit.collider.CompareTag("Device") && thisIslastedMovement()){
                 //É um device mas ja vai abrir
