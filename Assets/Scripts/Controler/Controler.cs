@@ -5,12 +5,12 @@ using UnityEngine;
 public class Controler : MonoBehaviour {
     #region Day-Night System
     [Header("Day-Night System")]
-    [SerializeField] private readonly byte numShifts = 3;
+    [SerializeField] private byte numShifts = 3;
     private int contShifts = 0;
     private bool isDay = true;
-    [SerializeField] private readonly bool initDay = true;
+    [SerializeField] private bool initDay = true;
     [SerializeField] private GameObject Background;
-    [SerializeField] private readonly float timeSecondTradeDayNight = 0.15f;
+    [SerializeField] private const float timeSecondTradeDayNight = 0.15f;
     private Coroutine coroutineTradeDayNight;
     private byte countCiclesForApply = 0;
     #endregion
@@ -31,6 +31,12 @@ public class Controler : MonoBehaviour {
     public delegate void UpdatedDeviceInNextMove(bool isDay);
     public event UpdatedDeviceInNextMove updatedDeviceInNextMove;
     #endregion
+
+    void Awake() {
+        if (!initDay) {
+            automaticTradeDayNight();
+        }
+    }
     void Start() {
         startedCounterShifts?.Invoke(numShifts);
         deviceSwitched?.Invoke(isDay);
@@ -52,6 +58,13 @@ public class Controler : MonoBehaviour {
             countCiclesForApply--;
         }
         coroutineTradeDayNight = null;
+        deviceSwitched?.Invoke(isDay);
+    }
+
+    private void automaticTradeDayNight() {
+        Quaternion rotation = Background.transform.rotation * Quaternion.Euler(0,0,-180);
+        Background.transform.rotation = rotation;
+        isDay = !isDay;
         deviceSwitched?.Invoke(isDay);
     }
 
