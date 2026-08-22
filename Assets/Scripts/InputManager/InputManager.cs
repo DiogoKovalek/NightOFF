@@ -77,6 +77,12 @@ public class InputManager : MonoBehaviour {
             case ACTION_MAP.MENU:
                 playerInput.SwitchCurrentActionMap("Menu");
                 break;
+            case ACTION_MAP.MINI_GAME:
+                playerInput.SwitchCurrentActionMap("MiniGame");
+                break;
+            case ACTION_MAP.LEVEL_COMPLETE:
+                playerInput.SwitchCurrentActionMap("LevelComplete");
+                break;
         }
     }
 
@@ -104,5 +110,7 @@ public class InputManager : MonoBehaviour {
 public enum ACTION_MAP {
     PLAYER,
     PAUSE,
-    MENU
+    MENU,
+    MINI_GAME,
+    LEVEL_COMPLETE
 }

@@ -10,6 +10,10 @@ public class Computer : Device, IInteract {
         base.disableDevice();
     }
     public void interacted(Player player) {
-        
+        player.GetPlayerAnimator().SetTrigger("winGame");
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.LEVEL_COMPLETE);
+    }
+    public bool isFreeForInteract() {
+        return isON;
     }
 }
