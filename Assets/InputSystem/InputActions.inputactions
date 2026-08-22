@@ -246,6 +246,18 @@
             "id": "95201705-8dc0-4ce7-8d36-83b6f4055aaa",
             "actions": [],
             "bindings": []
+        },
+        {
+            "name": "MiniGame",
+            "id": "67f91edd-72e2-472e-8a42-83a85d93b15a",
+            "actions": [],
+            "bindings": []
+        },
+        {
+            "name": "LevelComplete",
+            "id": "1978ae80-af5a-4620-ab4e-ad872c140c03",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

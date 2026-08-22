@@ -29,15 +29,15 @@ public class Player : MonoBehaviour {
     #region EVENTS
     public delegate void CollectedStar();
     public event CollectedStar collectedStar;
-    public delegate void InteractedAnything(IInteract interact);
-    public event InteractedAnything interactedAnything;
+    public delegate void InteractedComputer();
+    public event InteractedComputer interactedComputer;
     public delegate void PlayerMoved();
     public event PlayerMoved playerMoved;
     public delegate bool ThisIsLastedMovement();
     public event ThisIsLastedMovement thisIslastedMovement;
     #endregion
     void Awake() {
-        if(playerSprite != null) {
+        if (playerSprite != null) {
             playerSpriteRender = playerSprite.GetComponent<SpriteRenderer>();
             playerAnimator = playerSprite.GetComponent<Animator>();
         }
@@ -54,10 +54,10 @@ public class Player : MonoBehaviour {
         }
     }
     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.layer == 8) {
+        if (collision.gameObject.layer == 8) {
             ICollect collect = collision?.GetComponent<ICollect>();
-            if(collect != null) {
-                if(collision.gameObject.CompareTag("StarCollect")) collectedStar?.Invoke();
+            if (collect != null) {
+                if (collision.gameObject.CompareTag("StarCollect")) collectedStar?.Invoke();
                 collect.collected(this);
             }
         }
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour {
         switch (direction) {
             case 1: // UP
                 targetMove = (Vector2)transform.position + new Vector2(0, distPoints);
-                playerSpriteRender.flipX = true; 
+                playerSpriteRender.flipX = true;
                 break;
             case 2: // RIGHT
                 targetMove = (Vector2)transform.position + new Vector2(distPoints, 0);
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour {
                 return;
         }
         if (isColision(targetMove)) {
-            targetMove = (Vector2) transform.position;
+            targetMove = (Vector2)transform.position;
             return;
         }
         startMovePos = transform.position;
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour {
     }
     private void movement() {
         transform.position = Vector2.MoveTowards(transform.position, targetMove, speedMovement * Time.deltaTime);
-        
+
         float distanceCovered = Vector2.Distance(startMovePos, transform.position);
         float progress = distanceCovered / distPoints;
 
@@ -109,15 +109,20 @@ public class Player : MonoBehaviour {
         }
     }
     private bool isColision(Vector2 point) {
-        Vector2 direction = (targetMove - (Vector2) transform.position). normalized;
-        RaycastHit2D hit = Physics2D.Raycast((Vector2) transform.position, direction, distPoints, collisionLayer);
-        
-        if(hit.collider != null) {
+        Vector2 direction = (targetMove - (Vector2)transform.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, direction, distPoints, collisionLayer);
+
+        if (hit.collider != null) {
             IInteract interact = hit.collider?.GetComponent<IInteract>();
-            if(interact != null) {
-                interactedAnything?.Invoke(interact);
+            if (interact != null) {
+                if (interact.isFreeForInteract()) { // So executa se estiver ligado
+                    if (hit.collider.gameObject.CompareTag("Computer")) interactedComputer?.Invoke();
+                    interact.interacted(this);
+                    return true;
+                }
+                return true;
             }
-            if(hit.collider.CompareTag("Device") && thisIslastedMovement()){
+            if (hit.collider.CompareTag("Device") && thisIslastedMovement()) {
                 //É um device mas ja vai abrir
                 return false;
             }
@@ -131,7 +136,7 @@ public class Player : MonoBehaviour {
     public bool GetIsMoving() {
         return isMoving;
     }
-    public void SetIsFreeForMove(bool value){
+    public void SetIsFreeForMove(bool value) {
         isFreeForMove = value;
     }
 }

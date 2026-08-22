@@ -332,6 +332,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""95201705-8dc0-4ce7-8d36-83b6f4055aaa"",
             ""actions"": [],
             ""bindings"": []
+        },
+        {
+            ""name"": ""MiniGame"",
+            ""id"": ""67f91edd-72e2-472e-8a42-83a85d93b15a"",
+            ""actions"": [],
+            ""bindings"": []
+        },
+        {
+            ""name"": ""LevelComplete"",
+            ""id"": ""1978ae80-af5a-4620-ab4e-ad872c140c03"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -384,6 +396,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        // MiniGame
+        m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
+        // LevelComplete
+        m_LevelComplete = asset.FindActionMap("LevelComplete", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -391,6 +407,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Pause.enabled, "This will cause a leak and performance issues, InputActions.Pause.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Menu.enabled, "This will cause a leak and performance issues, InputActions.Menu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MiniGame.enabled, "This will cause a leak and performance issues, InputActions.MiniGame.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LevelComplete.enabled, "This will cause a leak and performance issues, InputActions.LevelComplete.Disable() has not been called.");
     }
 
     /// <summary>
@@ -750,6 +768,176 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="MenuActions" /> instance referencing this action map.
     /// </summary>
     public MenuActions @Menu => new MenuActions(this);
+
+    // MiniGame
+    private readonly InputActionMap m_MiniGame;
+    private List<IMiniGameActions> m_MiniGameActionsCallbackInterfaces = new List<IMiniGameActions>();
+    /// <summary>
+    /// Provides access to input actions defined in input action map "MiniGame".
+    /// </summary>
+    public struct MiniGameActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MiniGameActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_MiniGame; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MiniGameActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MiniGameActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MiniGameActions" />
+        public void AddCallbacks(IMiniGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MiniGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MiniGameActionsCallbackInterfaces.Add(instance);
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MiniGameActions" />
+        private void UnregisterCallbacks(IMiniGameActions instance)
+        {
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MiniGameActions.UnregisterCallbacks(IMiniGameActions)" />.
+        /// </summary>
+        /// <seealso cref="MiniGameActions.UnregisterCallbacks(IMiniGameActions)" />
+        public void RemoveCallbacks(IMiniGameActions instance)
+        {
+            if (m_Wrapper.m_MiniGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MiniGameActions.AddCallbacks(IMiniGameActions)" />
+        /// <seealso cref="MiniGameActions.RemoveCallbacks(IMiniGameActions)" />
+        /// <seealso cref="MiniGameActions.UnregisterCallbacks(IMiniGameActions)" />
+        public void SetCallbacks(IMiniGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MiniGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MiniGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MiniGameActions" /> instance referencing this action map.
+    /// </summary>
+    public MiniGameActions @MiniGame => new MiniGameActions(this);
+
+    // LevelComplete
+    private readonly InputActionMap m_LevelComplete;
+    private List<ILevelCompleteActions> m_LevelCompleteActionsCallbackInterfaces = new List<ILevelCompleteActions>();
+    /// <summary>
+    /// Provides access to input actions defined in input action map "LevelComplete".
+    /// </summary>
+    public struct LevelCompleteActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public LevelCompleteActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_LevelComplete; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="LevelCompleteActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(LevelCompleteActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="LevelCompleteActions" />
+        public void AddCallbacks(ILevelCompleteActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Add(instance);
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="LevelCompleteActions" />
+        private void UnregisterCallbacks(ILevelCompleteActions instance)
+        {
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="LevelCompleteActions.UnregisterCallbacks(ILevelCompleteActions)" />.
+        /// </summary>
+        /// <seealso cref="LevelCompleteActions.UnregisterCallbacks(ILevelCompleteActions)" />
+        public void RemoveCallbacks(ILevelCompleteActions instance)
+        {
+            if (m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="LevelCompleteActions.AddCallbacks(ILevelCompleteActions)" />
+        /// <seealso cref="LevelCompleteActions.RemoveCallbacks(ILevelCompleteActions)" />
+        /// <seealso cref="LevelCompleteActions.UnregisterCallbacks(ILevelCompleteActions)" />
+        public void SetCallbacks(ILevelCompleteActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelCompleteActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="LevelCompleteActions" /> instance referencing this action map.
+    /// </summary>
+    public LevelCompleteActions @LevelComplete => new LevelCompleteActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -832,6 +1020,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// <seealso cref="MenuActions.AddCallbacks(IMenuActions)" />
     /// <seealso cref="MenuActions.RemoveCallbacks(IMenuActions)" />
     public interface IMenuActions
+    {
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MiniGame" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MiniGameActions.AddCallbacks(IMiniGameActions)" />
+    /// <seealso cref="MiniGameActions.RemoveCallbacks(IMiniGameActions)" />
+    public interface IMiniGameActions
+    {
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LevelComplete" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="LevelCompleteActions.AddCallbacks(ILevelCompleteActions)" />
+    /// <seealso cref="LevelCompleteActions.RemoveCallbacks(ILevelCompleteActions)" />
+    public interface ILevelCompleteActions
     {
     }
 }

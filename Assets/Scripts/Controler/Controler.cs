@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Controler : MonoBehaviour {
     #region Day-Night System
@@ -33,6 +34,7 @@ public class Controler : MonoBehaviour {
     #endregion
 
     void Awake() {
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
         if (!initDay) {
             automaticTradeDayNight();
         }
@@ -73,8 +75,24 @@ public class Controler : MonoBehaviour {
         countStars++;
         compleatedStartInUI?.Invoke(countStars);
     }
-    public void OnInteractAnything(IInteract interact) {
+    public void OnInteractComputer() {
+        StartCoroutine(LevelComplete());
+    }
+    private IEnumerator LevelComplete() {
+        //Espera um tempo para a musica
 
+        //Toca musica
+
+        yield return new WaitForSeconds(1f);
+
+        //Exibe a tela de level complete
+
+        //Espera o comando do jogador
+
+        //Espera a tela sumir para depois trocar de scena
+
+        ManagerScenes.NextLevel();
+        Debug.Log("Passou de fase");
     }
     public void OnPlayerMove() {
         contShifts++;

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StarCollect
   - Device
+  - Computer
   layers:
   - Default
   - TransparentFX
