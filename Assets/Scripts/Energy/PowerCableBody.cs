@@ -27,16 +27,23 @@ public class PowerCableBody : MonoBehaviour
     private void DrawCurve() {
         for(int i = 0; i < resolution; i++) {
             float t = i / (float)(resolution - 1);
-            Vector3 position = Bezier(t, startP.position, curveP.position, endP.position);
+            Vector3 position = bezier(t, startP.position, curveP.position, endP.position);
             lineRenderer.SetPosition(i, position);
         }
     }
 
-    private Vector3 Bezier(float t, Vector3 pStart, Vector3 pMiddle, Vector3 pEnd) {
+    private Vector3 bezier(float t, Vector3 pStart, Vector3 pMiddle, Vector3 pEnd) {
         float u = 1 - t;
         float tt = t * t;
         float uu = u * u;
 
         return (uu * pStart) + (2 * u * t * pMiddle) + (tt * pEnd);
+    }
+    public void GetParans(out Transform startP, out Transform endP, out Transform curveP) {
+        startP = this.startP;
+        endP = this.endP;
+        curveP = this.curveP;
+        Debug.Log($"{startP.position.x} {startP.position.y}");
+        
     }
 }
