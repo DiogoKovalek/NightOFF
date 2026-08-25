@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 6749246987690363966}
   - component: {fileID: 8209265294138874799}
   - component: {fileID: 5769882334586163817}
+  - component: {fileID: 412061937118878484}
   m_Layer: 0
   m_Name: PowerCable
   m_TagString: Untagged
@@ -294,3 +295,18 @@ MonoBehaviour:
   endP: {fileID: 4529491988008792906}
   curveP: {fileID: 5204511282678218369}
   resolution: 15
+--- !u!114 &412061937118878484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9060076602315923761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed6108b1f3e1054395c3df3fc73aa20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefIconEnergy: {fileID: 1571854466545616194, guid: 1a08bd9c18c192d4caec0d37bb969b5c, type: 3}
+  listOfIcons: {fileID: 8221800667693533990}
+  speedIcons: {fileID: 0}
