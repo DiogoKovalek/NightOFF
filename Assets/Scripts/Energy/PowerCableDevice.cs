@@ -14,7 +14,8 @@ public class PowerCableDevice : MonoBehaviour {
     [SerializeField] private GameObject prefIconEnergy;
     [SerializeField] private Transform listOfIcons;
     [SerializeField] private float delayForSpawIcon = 1f;
-    private float td = 0;
+    [SerializeField] private float speedIcons = 3f;
+    private float td = 1;
     private List<IconMovePowerCable> listIcons = new List<IconMovePowerCable>();
     private bool isOn = false;
 
@@ -39,7 +40,7 @@ public class PowerCableDevice : MonoBehaviour {
                     icon = obj.GetComponent<IconMovePowerCable>();
                     listIcons.Add(icon);
                 }
-                icon.StartMovement(startP.localPosition, endP.localPosition, curveP.localPosition);
+                icon.StartMovement(startP.localPosition, endP.localPosition, curveP.localPosition, speedIcons);
             }
         }
     }
@@ -49,9 +50,14 @@ public class PowerCableDevice : MonoBehaviour {
     }
     private void OnEnablePowerCable() {
         isOn = true;
+        td = 1;
     }
     private void OnDisablePowerCable() {
         isOn = false;
+        //Desativa todos icones de energia
+        foreach(var icon in listIcons) {
+            icon.StopMovement();
+        }
     }
 
 }

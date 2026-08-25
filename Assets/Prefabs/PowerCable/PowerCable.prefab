@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 9060076602315923761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -205,21 +205,21 @@ LineRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_Positions:
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.4999995, y: 0, z: 0}
-  - {x: -7.5000005, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5000005, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5000005, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
-  - {x: -7.5, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -310,4 +310,4 @@ MonoBehaviour:
   body: {fileID: 5769882334586163817}
   prefIconEnergy: {fileID: 1571854466545616194, guid: 1a08bd9c18c192d4caec0d37bb969b5c, type: 3}
   listOfIcons: {fileID: 8221800667693533990}
-  speedIcons: 3
+  delayForSpawIcon: 1

@@ -28,13 +28,14 @@ public class IconMovePowerCable : MonoBehaviour
 
         return (uu * pStart) + (2 * u * t * pMiddle) + (tt * pEnd);
     }
-    public void StartMovement(Vector3 startP, Vector3 endP, Vector3 curveP) {
+    public void StartMovement(Vector3 startP, Vector3 endP, Vector3 curveP, float speed) {
         isActive = true;
         gameObject.SetActive(true);
         t = 0;
         this.startP = startP;
         this.endP = endP;
         this.curveP = curveP;
+        speedIcons = speed;
         transform.position = startP;
     }
     public void StopMovement() {
