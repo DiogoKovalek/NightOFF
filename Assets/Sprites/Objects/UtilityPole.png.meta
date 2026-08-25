@@ -129,7 +129,7 @@ TextureImporter:
         x: 14
         y: 7
         width: 20
-        height: 30
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,6 +139,27 @@ TextureImporter:
       bones: []
       spriteID: 5ab09bea5ef1f8541ade430fc9b7d27f
       internalID: 1376151181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UtilityPole_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 19
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb0ae3cee20f854aac556b97931011e
+      internalID: -714036153
       vertices: []
       indices: 
       edges: []
@@ -155,6 +176,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UtilityPole_0: 1376151181
+      UtilityPole_1: -714036153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
