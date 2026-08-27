@@ -24,15 +24,15 @@ public class IconUp : MonoBehaviour {
             initialPosition = spriteIcon.transform.position;
             targetPosition = (Vector2) spriteIcon.transform.position + Vector2.up * distMoveUp;
         }
+        timeAlpha = timeEnabled*percentToStartLostAlpha;
     }
     void Update() {
         if (isActive) {
             t += Time.deltaTime;
-            timeAlpha = timeEnabled - timeEnabled*percentToStartLostAlpha;
             spriteIcon.transform.position = Vector2.Lerp(initialPosition, targetPosition, t / timeEnabled);
             if (t >= timeAlpha) {
                 //Tem algum erro aqui
-                colorSprite.a = Mathf.Lerp(1,0, t / timeAlpha);
+                colorSprite.a = Mathf.Lerp(1,0, (t - timeAlpha) / (timeEnabled - timeAlpha));
                 sprRen.color = colorSprite;
             }
             if (t >= timeEnabled) {

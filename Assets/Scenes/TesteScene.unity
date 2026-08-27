@@ -11258,7 +11258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteIcon: {fileID: 84695433}
-  timeEnabled: 3
+  timeEnabled: 1
   percentToStartLostAlpha: 0.8
   distMoveUp: 0.5
 --- !u!1 &1464682435
