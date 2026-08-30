@@ -41,11 +41,11 @@ public class IconUp : MonoBehaviour {
         }
     }
     public void StartMovement(bool isON) {
+        gameObject.SetActive(true);
         t = 0;
         colorSprite.a = 1;
         sprRen.color = colorSprite;
         spriteIcon.transform.position = initialPosition;
-        gameObject.SetActive(true);
         isActive = true;
         animator?.SetBool("isON", isON);
     }
