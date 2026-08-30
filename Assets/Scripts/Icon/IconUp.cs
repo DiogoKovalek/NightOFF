@@ -47,7 +47,7 @@ public class IconUp : MonoBehaviour {
         sprRen.color = colorSprite;
         spriteIcon.transform.position = initialPosition;
         isActive = true;
-        animator?.SetBool("isON", isON);
+        if(animator != null) animator?.SetBool("isON", isON);
     }
     private void StopMovement() {
         isActive = false;

@@ -9,12 +9,14 @@ public class EventManager : MonoBehaviour
     [SerializeField] private UIControler uiControler;
     [SerializeField] private GameObject device;
     [SerializeField] private GameObject powerCables;
+    [SerializeField] private GameObject solarPanel;
     private Device[] listDevices;
     private PowerCableDevice[] listPowerCable;
-
+    private SolarPanel[] listSolarPanel;
     void Awake() {
         if(device != null) listDevices = device?.GetComponentsInChildren<Device>();
         if(powerCables != null) listPowerCable = powerCables?.GetComponentsInChildren<PowerCableDevice>();
+        if(solarPanel != null) listSolarPanel = solarPanel?.GetComponentsInChildren<SolarPanel>();
         initEvents();
     }
 
@@ -37,6 +39,11 @@ public class EventManager : MonoBehaviour
         if(listPowerCable != null){
             foreach(var pow in listPowerCable) {
                 controler.deviceSwitched += pow.OnDeviceSwitch;
+            }
+        }
+        if(listDevices != null) {
+            foreach (var sol in listSolarPanel) {
+               controler.deviceSwitched += sol.OnDeviceSwitch; 
             }
         }
     }
