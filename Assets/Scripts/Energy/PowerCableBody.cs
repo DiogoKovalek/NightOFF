@@ -43,7 +43,6 @@ public class PowerCableBody : MonoBehaviour
         startP = this.startP;
         endP = this.endP;
         curveP = this.curveP;
-        Debug.Log($"{startP.position.x} {startP.position.y}");
         
     }
 }

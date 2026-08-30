@@ -7,6 +7,7 @@ public class Device : MonoBehaviour {
     [SerializeField] protected new BoxCollider2D collider;
     protected Controler controler;
     [SerializeField] protected Animator anim;
+    [SerializeField] private IconUp iconUp;
     [SerializeField] protected bool isActiveInDay = true;
     protected bool isON = true;
     protected bool thereIsNotSomethingOnTop = true;
@@ -30,10 +31,12 @@ public class Device : MonoBehaviour {
     protected virtual void enableDevice() {
         isON = true;
         anim?.SetBool("isON", true);
+        iconUp?.StartMovement(isON);
     }
     protected virtual void disableDevice() {
         isON = false;
         anim?.SetBool("isON", false);
+        iconUp?.StartMovement(isON);
     }
     protected void enableCollider() {
         collider.enabled = true;
