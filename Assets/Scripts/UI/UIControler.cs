@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIControler : MonoBehaviour {
+    [Header("Panels")]
+    [SerializeField] private GameObject GameMenu;
+    [SerializeField] private GameObject LevelCompleteMenu;
     [Header("Stars")]
     [SerializeField] private UIStar[] listStars;
     [Header("ShiftCounter")]
@@ -15,7 +18,8 @@ public class UIControler : MonoBehaviour {
     private float strentchShiftCounter = 70f;
     [Header("PauseMenu")]
     [SerializeField] private GameObject pauseMenu;
-
+    [Header("Level Complete")]
+    [SerializeField] GameObject BlackBG;
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
