@@ -73,5 +73,8 @@ public class UIControler : MonoBehaviour {
             numShifts = 0;
         }
     }
+    public void OnLevelCompleteUI() {
+        
+    }
     #endregion
 }

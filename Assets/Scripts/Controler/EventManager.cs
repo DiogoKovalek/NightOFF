@@ -29,6 +29,7 @@ public class EventManager : MonoBehaviour
         controler.compleatedStartInUI += uiControler.OnCompleteStarInUI;
         controler.startedCounterShifts += uiControler.OnStartCounterShifts;
         controler.incrementedOneShift += uiControler.OnIncrementOneShift;
+        controler.levelCompletedUI += uiControler.OnLevelCompleteUI;
 
         if(listDevices != null){
             foreach(var dev in listDevices){
