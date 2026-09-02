@@ -8844,7 +8844,10 @@ MonoBehaviour:
   - {fileID: 1627933976}
   - {fileID: 1103003644}
   - {fileID: 1118315735}
-  starsDelayToShow: 1
+  starsDelayToShow: 0.45
+  starGrowScale: 1.5
+  starTimeToGrow: 0.4
+  starTimeToDecrease: 0.4
 --- !u!1 &1002908224
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,9 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private float blackBGTimeTransitionUp = 0.4f;
     [SerializeField] private RectTransform[] Stars;
     [SerializeField] private float starsDelayToShow = 1;
+    [SerializeField] private float starGrowScale = 1.4f;
+    [SerializeField] private float starTimeToGrow = 0.5f;
+    [SerializeField] private float starTimeToDecrease = 0.5f;
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -117,6 +120,7 @@ public class UIControler : MonoBehaviour {
         float countStars = 0;
         foreach(RectTransform star in Stars) {
             star.gameObject.SetActive(true);
+            StartCoroutine(animationGrowDecrease(star, star.localScale * starGrowScale, starTimeToGrow, starTimeToDecrease));
             if(numStars > countStars) {
                 countStars++;
                 star.gameObject?.GetComponent<UIStar>().EnableStar();
@@ -124,17 +128,36 @@ public class UIControler : MonoBehaviour {
             yield return new WaitForSeconds(starsDelayToShow);
         }
     }
-    private IEnumerator animationGrowDecrease(RectTransform rect, float timerToGrow, float timerToDecrease, bool repeat = false) {
+    private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
         //=== Efeito de crescer e diminuir ====
         //=====================================
 
+        Vector3 initialLocalScale = rect.localScale;
+        Vector3 scale = initialLocalScale;
+
         //Cresce
         float t = 0;
+        while (t < timerToGrow) {
+            t += Time.deltaTime;
+            scale = Vector3.Lerp(initialLocalScale, maxScale, t/timerToGrow);
+            rect.localScale = scale;
+            yield return null;
+        }
 
         //Diminui
         t = 0; 
+        while(t < timerToDecrease) {
+            t += Time.deltaTime;
+            scale = Vector3.Lerp(maxScale, initialLocalScale, t /timerToDecrease);
+            rect.localScale = scale;
+            yield return null;
+        }
+        scale = Vector3.Lerp(maxScale, initialLocalScale, t /timerToDecrease);
+        rect.localScale = scale;
         yield return null;
+
+        if(repeat) StartCoroutine(animationGrowDecrease(rect, maxScale, timerToGrow, timerToDecrease, repeat));
     }
     #endregion
 }
