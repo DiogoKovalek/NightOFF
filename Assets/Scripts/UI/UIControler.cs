@@ -22,7 +22,9 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private RectTransform BlackBG;
     [SerializeField] private float blackBGStartY = -1095;
     [SerializeField] private float blackBGEndY = 0;
-    [SerializeField] private float blackBGTimeTransitionUp = 0.6f;
+    [SerializeField] private float blackBGTimeTransitionUp = 0.4f;
+    [SerializeField] private RectTransform[] Stars;
+    [SerializeField] private float starsDelayToShow = 1;
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -82,9 +84,12 @@ public class UIControler : MonoBehaviour {
     #endregion
 
     #region Level Complete
-    public IEnumerator levelCompleteTrasition() {
+    private IEnumerator levelCompleteTrasition() {
         //Desativa tudo
         BlackBG.gameObject.SetActive(false);
+        foreach(RectTransform star in Stars) {
+            star.gameObject.SetActive(false);
+        }
 
         //Seta posicao do BlackBG
         BlackBG.anchoredPosition = Vector2.zero;
@@ -105,6 +110,25 @@ public class UIControler : MonoBehaviour {
         }
         blackBGPosition.y = blackBGEndY;
         BlackBG.anchoredPosition = blackBGPosition;
+        yield return null;
+
+        //Estrelas
+
+        foreach(RectTransform star in Stars) {
+            star.gameObject.SetActive(true);
+            yield return new WaitForSeconds(starsDelayToShow);
+        }
+    }
+    private IEnumerator animationGrowDecrease(RectTransform rect, float timerToGrow, float timerToDecrease, bool repeat = false) {
+        //=====================================
+        //=== Efeito de crescer e diminuir ====
+        //=====================================
+
+        //Cresce
+        float t = 0;
+
+        //Diminui
+        t = 0; 
         yield return null;
     }
     #endregion
