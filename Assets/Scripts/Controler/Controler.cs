@@ -25,7 +25,7 @@ public class Controler : MonoBehaviour {
     public event CompleatedStarInUI compleatedStartInUI;
     public delegate void StartedCounterShifts(byte numShifts);
     public event StartedCounterShifts startedCounterShifts;
-    public delegate void LevelCompletedUI();
+    public delegate void LevelCompletedUI(byte numStars);
     public event LevelCompletedUI levelCompletedUI;
     public delegate void IncrementedOneShift();
     public event IncrementedOneShift incrementedOneShift;
@@ -88,7 +88,7 @@ public class Controler : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         //Exibe a tela de level complete
-        levelCompletedUI?.Invoke();
+        levelCompletedUI?.Invoke((byte) countStars);
         
         //Espera o comando do jogador
 

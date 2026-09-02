@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIControler : MonoBehaviour {
@@ -78,13 +79,13 @@ public class UIControler : MonoBehaviour {
             numShifts = 0;
         }
     }
-    public void OnLevelCompleteUI() {
-        StartCoroutine(levelCompleteTrasition());
+    public void OnLevelCompleteUI(byte numStars) {
+        StartCoroutine(levelCompleteTrasition(numStars));
     }
     #endregion
 
     #region Level Complete
-    private IEnumerator levelCompleteTrasition() {
+    private IEnumerator levelCompleteTrasition(byte numStars) {
         //Desativa tudo
         BlackBG.gameObject.SetActive(false);
         foreach(RectTransform star in Stars) {
@@ -113,9 +114,13 @@ public class UIControler : MonoBehaviour {
         yield return null;
 
         //Estrelas
-
+        float countStars = 0;
         foreach(RectTransform star in Stars) {
             star.gameObject.SetActive(true);
+            if(numStars > countStars) {
+                countStars++;
+                star.gameObject?.GetComponent<UIStar>().EnableStar();
+            }
             yield return new WaitForSeconds(starsDelayToShow);
         }
     }
