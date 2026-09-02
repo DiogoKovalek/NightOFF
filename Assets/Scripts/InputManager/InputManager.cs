@@ -66,6 +66,9 @@ public class InputManager : MonoBehaviour {
         moveDirection = 0; // Sempre seta para 0 o valor do input para que nao se repita mais de uma vez
         return value;
     }
+    public void OnClickToContinue() {
+        Debug.Log("Click para continuar");
+    }
     public void TradeActionMap(ACTION_MAP actionMap) {
         switch (actionMap) {
             case ACTION_MAP.PLAYER:
@@ -82,6 +85,7 @@ public class InputManager : MonoBehaviour {
                 break;
             case ACTION_MAP.LEVEL_COMPLETE:
                 playerInput.SwitchCurrentActionMap("LevelComplete");
+                Debug.Log("Switch to Level Complete");
                 break;
         }
     }

@@ -342,8 +342,63 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             ""name"": ""LevelComplete"",
             ""id"": ""1978ae80-af5a-4620-ab4e-ad872c140c03"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""ClickToContinue"",
+                    ""type"": ""Button"",
+                    ""id"": ""84ad1e13-8ab2-4405-8302-3031482f0855"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""581829f9-3481-41ce-8376-e0424479dbb7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ClickToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f42ec77-0877-4277-b9af-edf0148bba3c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ClickToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42a544c8-91b2-458c-bbd3-bf1a304efea2"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""ClickToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf238601-5c04-4ead-a443-816273a53e6b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ClickToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -400,6 +455,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
         // LevelComplete
         m_LevelComplete = asset.FindActionMap("LevelComplete", throwIfNotFound: true);
+        m_LevelComplete_ClickToContinue = m_LevelComplete.FindAction("ClickToContinue", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -857,6 +913,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // LevelComplete
     private readonly InputActionMap m_LevelComplete;
     private List<ILevelCompleteActions> m_LevelCompleteActionsCallbackInterfaces = new List<ILevelCompleteActions>();
+    private readonly InputAction m_LevelComplete_ClickToContinue;
     /// <summary>
     /// Provides access to input actions defined in input action map "LevelComplete".
     /// </summary>
@@ -868,6 +925,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
         public LevelCompleteActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "LevelComplete/ClickToContinue".
+        /// </summary>
+        public InputAction @ClickToContinue => m_Wrapper.m_LevelComplete_ClickToContinue;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -894,6 +955,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_LevelCompleteActionsCallbackInterfaces.Add(instance);
+            @ClickToContinue.started += instance.OnClickToContinue;
+            @ClickToContinue.performed += instance.OnClickToContinue;
+            @ClickToContinue.canceled += instance.OnClickToContinue;
         }
 
         /// <summary>
@@ -905,6 +969,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="LevelCompleteActions" />
         private void UnregisterCallbacks(ILevelCompleteActions instance)
         {
+            @ClickToContinue.started -= instance.OnClickToContinue;
+            @ClickToContinue.performed -= instance.OnClickToContinue;
+            @ClickToContinue.canceled -= instance.OnClickToContinue;
         }
 
         /// <summary>
@@ -1037,5 +1104,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// <seealso cref="LevelCompleteActions.RemoveCallbacks(ILevelCompleteActions)" />
     public interface ILevelCompleteActions
     {
+        /// <summary>
+        /// Method invoked when associated input action "ClickToContinue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClickToContinue(InputAction.CallbackContext context);
     }
 }

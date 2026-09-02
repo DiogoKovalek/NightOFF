@@ -81,6 +81,8 @@ public class Controler : MonoBehaviour {
         StartCoroutine(LevelComplete());
     }
     private IEnumerator LevelComplete() {
+        //Troca os inputs
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.LEVEL_COMPLETE);
         //Espera um tempo para a musica
 
         //Toca musica
