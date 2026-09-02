@@ -94,7 +94,7 @@ public class Controler : MonoBehaviour {
 
         //Espera a tela sumir para depois trocar de scena
 
-        ManagerScenes.NextLevel();
+        //ManagerScenes.NextLevel();
         Debug.Log("Passou de fase");
     }
     public void OnPlayerMove() {

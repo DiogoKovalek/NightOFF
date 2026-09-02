@@ -19,7 +19,10 @@ public class UIControler : MonoBehaviour {
     [Header("PauseMenu")]
     [SerializeField] private GameObject pauseMenu;
     [Header("Level Complete")]
-    [SerializeField] GameObject BlackBG;
+    [SerializeField] private RectTransform BlackBG;
+    [SerializeField] private float blackBGStartY = -1095;
+    [SerializeField] private float blackBGEndY = 0;
+    [SerializeField] private float blackBGTimeTransitionUp = 0.6f;
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -74,7 +77,35 @@ public class UIControler : MonoBehaviour {
         }
     }
     public void OnLevelCompleteUI() {
-        
+        StartCoroutine(levelCompleteTrasition());
+    }
+    #endregion
+
+    #region Level Complete
+    public IEnumerator levelCompleteTrasition() {
+        //Desativa tudo
+        BlackBG.gameObject.SetActive(false);
+
+        //Seta posicao do BlackBG
+        BlackBG.anchoredPosition = Vector2.zero;
+
+        //Ativa  o menu de level complete
+        GameMenu.SetActive(false);
+        LevelCompleteMenu.SetActive(true);
+
+        //Transicao do plano de fundo preto
+        BlackBG.gameObject.SetActive(true);
+        float t = 0;
+        Vector3 blackBGPosition = new Vector3(BlackBG.anchoredPosition.x, blackBGStartY, BlackBG.anchoredPosition.y); 
+        while (t < blackBGTimeTransitionUp) {
+            t += Time.deltaTime;
+            blackBGPosition.y = Mathf.Lerp(blackBGStartY, blackBGEndY, t/blackBGTimeTransitionUp);
+            BlackBG.anchoredPosition = blackBGPosition;
+            yield return null;
+        }
+        blackBGPosition.y = blackBGEndY;
+        BlackBG.anchoredPosition = blackBGPosition;
+        yield return null;
     }
     #endregion
 }
