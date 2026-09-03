@@ -17,7 +17,7 @@ public class IconMovePowerCable : MonoBehaviour
     }
     private void MoveIcon() {
         t += Time.deltaTime / speedIcons;
-        transform.localPosition = bezier(t, startP, curveP, endP);
+        transform.position = bezier(t, startP, curveP, endP);
         if(t >= 1) StopMovement();
     }
     private Vector3 bezier(float t, Vector3 pStart, Vector3 pMiddle, Vector3 pEnd) {
@@ -36,6 +36,7 @@ public class IconMovePowerCable : MonoBehaviour
         this.endP = endP;
         this.curveP = curveP;
         speedIcons = speed;
+        
         transform.position = startP;
     }
     public void StopMovement() {
