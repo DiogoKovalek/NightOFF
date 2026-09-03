@@ -28,8 +28,36 @@ public class CloudControler : MonoBehaviour {
     [SerializeField] private byte minAlphaPrefab = 230;
     [SerializeField] private byte maxAlphaPrefab = 255;
 
+    //Controle
+    private List<Cloud> listClouds = new List<Cloud>();
+    private Vector2 position = Vector2.zero;
+    private int quantPrefab = 0;
+    private float speedSpawn = 0;
+    private float speedfPref = 0;
+    private float scalePref = 1;
+    private float alphaPref = 1;
+
     void Start() {
-        spawnPrefab<Cloud>(Vector2.zero, Vector2.left, 3, 2, 200/255f);
+        // Spawnar em pontos aleatorios para comecar
+        
+    }
+
+    private IEnumerator loopSpawn() {
+        yield return null;
+    }
+
+    private void randomlyAtribute(bool isStart) {
+        if (isStart) { // Qualquer posicao do quadrado
+            position.x = Random.Range(spawnAreaDownLeft.x, spawnAreaUpRight.x);
+            position.y = Random.Range(spawnAreaDownLeft.y, spawnAreaUpRight.y);
+        }
+        else { // Apenas nas laterais
+            position.x = spawnAreaUpRight.x;
+            position.y = Random.Range(spawnAreaDownLeft.y, spawnAreaUpRight.y);
+        }
+        speedfPref = Random.Range(minSpeedPrefab, maxSpeedPrefab);
+        scalePref = Random.Range(minScalePrefab, maxScalePrefab);
+        alphaPref = Random.Range(minAlphaPrefab, maxAlphaPrefab + 1) / 255f;
     }
 
     private void spawnPrefab<T>(Vector2 position, Vector2 direction, float speed, float scale, float alpha)
