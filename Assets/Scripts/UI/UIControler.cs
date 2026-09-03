@@ -1,14 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UIControler : MonoBehaviour {
     [Header("Panels")]
     [SerializeField] private GameObject GameMenu;
     [SerializeField] private GameObject LevelCompleteMenu;
+
     [Header("Stars")]
     [SerializeField] private UIStar[] listStars;
+
     [Header("ShiftCounter")]
     [SerializeField] private GameObject shiftCounter;
     [SerializeField] private GameObject prefCounter;
@@ -17,8 +20,10 @@ public class UIControler : MonoBehaviour {
     private byte numShifts = 0;
     private float startLenghtRightShifitCounter = 535f;
     private float strentchShiftCounter = 70f;
+
     [Header("PauseMenu")]
     [SerializeField] private GameObject pauseMenu;
+
     [Header("Level Complete")]
     [SerializeField] private RectTransform BlackBG;
     [SerializeField] private float blackBGStartY = -1095;
@@ -32,6 +37,11 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private GameObject TextClickToContinue;
     [SerializeField] private float textDelayShining = 0.8f;
 
+    [Header("BlackScreen")]
+    [SerializeField] private RectTransform BlackScreen;
+    [SerializeField] private float timeToSlide = 0.7f;
+    private bool isBlackScreenInCenter = true;
+    private float widthCanvas;
 
     #region EVENTS
     public delegate void PausedGame();
@@ -45,6 +55,25 @@ public class UIControler : MonoBehaviour {
     public delegate void NextedLevel();
     public event NextedLevel nextedLevel;
     #endregion
+
+    void Awake() {
+        GameMenu.SetActive(true);
+        LevelCompleteMenu.SetActive(false);
+
+        // BlackScreen Começa no centro da tela
+        BlackScreen.gameObject.SetActive(true);
+        BlackScreen.anchoredPosition = Vector3.zero;
+        isBlackScreenInCenter = true;
+
+        // Pegar tamanho do Canvas
+        CanvasScaler can = GetComponent<CanvasScaler>();
+        if(can != null) widthCanvas = can.referenceResolution.x;
+        else widthCanvas = 1920; // Padrao
+    }
+
+    void Start() {
+        StartCoroutine(slideBlackScreen());
+    }
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -69,10 +98,44 @@ public class UIControler : MonoBehaviour {
         continuedGame?.Invoke();
     }
     public void OnRestartGame() {
-        restartedGame?.Invoke();
+        StartCoroutine(slideBlackScreen(() => restartedGame?.Invoke()));
+        //restartedGame?.Invoke();
     }
     public void OnExitGame() {
-        exitedGame?.Invoke();
+        StartCoroutine(slideBlackScreen(() => exitedGame?.Invoke()));
+        //exitedGame?.Invoke();
+    }
+
+    public IEnumerator slideBlackScreen(System.Action actionNext = null) {
+        float t = 0;
+        float startX = BlackScreen.anchoredPosition.x;
+        float endX = 0;
+        Vector3 position = Vector3.zero;
+
+        if (isBlackScreenInCenter) {// Centro para esquerda
+            startX = 0;
+            endX = -widthCanvas;
+            position.x = startX;
+            BlackScreen.anchoredPosition = position;
+        }
+        else {// Esquerda para Centro
+            startX = widthCanvas;
+            endX = 0;
+            position.x = startX;
+            BlackScreen.anchoredPosition = position;
+        }
+        while (t < timeToSlide) {
+            t += Time.deltaTime;
+            position.x = Mathf.Lerp(startX, endX, t/timeToSlide);
+            BlackScreen.anchoredPosition = position;
+            yield return null;
+        }
+        position.x = endX;
+        BlackScreen.anchoredPosition = position;
+
+        isBlackScreenInCenter = !isBlackScreenInCenter;
+        
+        actionNext?.Invoke();
     }
 
     #region EVENTS
