@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour {
     public static InputManager inputManager;
     private PlayerInput playerInput;
     private byte moveDirection = 0; // 0:NULL 1:UP 2:RIGHT 3:DOWN 4:LEFT
+    private bool clickToContinue = false;
 
     #region TOUCH CONTROLS
     private Vector2 startPosition;
@@ -61,9 +62,17 @@ public class InputManager : MonoBehaviour {
             checkSwipe();
         }
     }
+    public void OnClickToContinue() {
+        clickToContinue = true;
+    }
     public byte GetMoveDirection() {
         byte value = moveDirection;
         moveDirection = 0; // Sempre seta para 0 o valor do input para que nao se repita mais de uma vez
+        return value;
+    }
+    public bool GetCliclToContinue() {
+        bool value = clickToContinue;
+        clickToContinue = false;
         return value;
     }
     public void TradeActionMap(ACTION_MAP actionMap) {
@@ -82,6 +91,7 @@ public class InputManager : MonoBehaviour {
                 break;
             case ACTION_MAP.LEVEL_COMPLETE:
                 playerInput.SwitchCurrentActionMap("LevelComplete");
+                Debug.Log("Switch to Level Complete");
                 break;
         }
     }

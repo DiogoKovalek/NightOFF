@@ -35,8 +35,8 @@ public class PowerCableDevice : MonoBehaviour {
                     }
                 }
                 if(icon == null){
-                    GameObject obj = Instantiate(prefIconEnergy, startP.localPosition, prefIconEnergy.transform.rotation);
-                    obj.transform.SetParent(listOfIcons);
+                    Debug.Log(startP.localPosition);
+                    GameObject obj = Instantiate(prefIconEnergy, startP.localPosition, prefIconEnergy.transform.rotation, listOfIcons);
                     icon = obj.GetComponent<IconMovePowerCable>();
                     listIcons.Add(icon);
                 }

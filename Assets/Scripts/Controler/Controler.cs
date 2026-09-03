@@ -25,6 +25,8 @@ public class Controler : MonoBehaviour {
     public event CompleatedStarInUI compleatedStartInUI;
     public delegate void StartedCounterShifts(byte numShifts);
     public event StartedCounterShifts startedCounterShifts;
+    public delegate void LevelCompletedUI(byte numStars);
+    public event LevelCompletedUI levelCompletedUI;
     public delegate void IncrementedOneShift();
     public event IncrementedOneShift incrementedOneShift;
     public delegate void DeviceSwitched(bool isDay);
@@ -75,10 +77,29 @@ public class Controler : MonoBehaviour {
         countStars++;
         compleatedStartInUI?.Invoke(countStars);
     }
+    public void OnPauseGame() {
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PAUSE);
+        Time.timeScale = 0f;
+    }
+    public void OnContinueGame() {
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
+        Time.timeScale = 1f;
+    }
+    public void OnRestartGame() {
+        ManagerScenes.RestartLevel();
+    }
+    public void OnExitGame() {
+        ManagerScenes.ExitToHomeScreen();
+    }
+    public void OnNextLevel() {
+        ManagerScenes.NextLevel();
+    }
     public void OnInteractComputer() {
         StartCoroutine(LevelComplete());
     }
     private IEnumerator LevelComplete() {
+        //Troca os inputs
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.LEVEL_COMPLETE);
         //Espera um tempo para a musica
 
         //Toca musica
@@ -86,13 +107,7 @@ public class Controler : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         //Exibe a tela de level complete
-
-        //Espera o comando do jogador
-
-        //Espera a tela sumir para depois trocar de scena
-
-        ManagerScenes.NextLevel();
-        Debug.Log("Passou de fase");
+        levelCompletedUI?.Invoke((byte) countStars);
     }
     public void OnPlayerMove() {
         contShifts++;
