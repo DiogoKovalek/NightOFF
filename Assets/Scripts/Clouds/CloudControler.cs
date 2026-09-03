@@ -29,9 +29,8 @@ public class CloudControler : MonoBehaviour {
     [SerializeField] private byte maxAlphaPrefab = 255;
 
     //Controle
-    private List<Cloud> listClouds = new List<Cloud>();
+    private List<GameObject> listClouds = new List<GameObject>();
     private Vector2 position = Vector2.zero;
-    private int quantPrefab = 0;
     private float speedSpawn = 0;
     private float speedfPref = 0;
     private float scalePref = 1;
@@ -39,7 +38,12 @@ public class CloudControler : MonoBehaviour {
 
     void Start() {
         // Spawnar em pontos aleatorios para comecar
-        
+        int aux = Random.Range(minQuantPrefab, maxQuantPrefab + 1);
+        Debug.Log(aux);
+        for(int i = 0; i < aux; i++) {
+            randomlyAtribute(true);
+            spawnPrefab<Cloud>(position, Vector2.left, speedfPref, scalePref, alphaPref);
+        }
     }
 
     private IEnumerator loopSpawn() {
@@ -61,8 +65,12 @@ public class CloudControler : MonoBehaviour {
     }
 
     private void spawnPrefab<T>(Vector2 position, Vector2 direction, float speed, float scale, float alpha)
-    where T : IMovable{
-        GameObject obj = Instantiate(prefabCloud, position, prefabCloud.transform.rotation, this.transform);
+    where T : IMovable {
+        GameObject obj = getPrefDisable();
+        if (obj == null && listClouds.Count < maxQuantPrefab) {
+            obj = Instantiate(prefabCloud, position, prefabCloud.transform.rotation, this.transform);
+            listClouds.Add(obj);
+        }
         obj.transform.localScale = obj.transform.localScale * scale;
         SpriteRenderer sprRen = obj.GetComponent<SpriteRenderer>();
         if (sprRen != null) {
@@ -74,5 +82,13 @@ public class CloudControler : MonoBehaviour {
         scr?.SetSpeed(speed);
         scr?.SetDirection(direction);
         scr?.Movement(true);
+    }
+    private GameObject getPrefDisable() {
+        foreach (GameObject obj in listClouds) {
+            if (!obj.activeSelf) {
+                return obj;
+            }
+        }
+        return null;
     }
 }

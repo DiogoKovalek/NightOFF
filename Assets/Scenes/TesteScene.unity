@@ -6548,17 +6548,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabCloud: {fileID: 3470071964884860682, guid: d0a225eff9c993b4a989b53c78631a16, type: 3}
-  spawnAreaDownLeft: {x: 0, y: 0}
-  spawnAreaUpRight: {x: 0, y: 0}
+  spawnAreaDownLeft: {x: -12.5, y: 1}
+  spawnAreaUpRight: {x: 12.5, y: 4.2}
   minQuantPrefab: 2
   maxQuantPrefab: 6
   minSpeedSpawn: 1
   maxSpeedSpawn: 1.5
-  minSpeedPrefab: 3
-  maxSpeedPrefab: 10
-  minScalePrefab: 0.8
-  maxScalePrefab: 1.3
-  minAlphaPrefab: 230
+  minSpeedPrefab: 1.5
+  maxSpeedPrefab: 2.5
+  minScalePrefab: 0.7
+  maxScalePrefab: 1.1
+  minAlphaPrefab: 200
   maxAlphaPrefab: 255
 --- !u!4 &605399370
 Transform:
