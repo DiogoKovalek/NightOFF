@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -98,15 +99,15 @@ public class UIControler : MonoBehaviour {
         continuedGame?.Invoke();
     }
     public void OnRestartGame() {
+        continuedGame?.Invoke();
         StartCoroutine(slideBlackScreen(() => restartedGame?.Invoke()));
-        //restartedGame?.Invoke();
     }
     public void OnExitGame() {
+        continuedGame?.Invoke();
         StartCoroutine(slideBlackScreen(() => exitedGame?.Invoke()));
-        //exitedGame?.Invoke();
     }
 
-    public IEnumerator slideBlackScreen(System.Action actionNext = null) {
+    public IEnumerator slideBlackScreen(Action actionNext = null) {
         float t = 0;
         float startX = BlackScreen.anchoredPosition.x;
         float endX = 0;
