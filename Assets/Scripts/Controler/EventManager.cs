@@ -31,6 +31,12 @@ public class EventManager : MonoBehaviour
         controler.incrementedOneShift += uiControler.OnIncrementOneShift;
         controler.levelCompletedUI += uiControler.OnLevelCompleteUI;
 
+        uiControler.pausedGame += controler.OnPauseGame;
+        uiControler.continuedGame += controler.OnContinueGame;
+        uiControler.restartedGame += controler.OnRestartGame;
+        uiControler.exitedGame += controler.OnExitGame;
+        uiControler.nextedLevel += controler.OnNextLevel;
+
         if(listDevices != null){
             foreach(var dev in listDevices){
                 dev.linkControler(controler);

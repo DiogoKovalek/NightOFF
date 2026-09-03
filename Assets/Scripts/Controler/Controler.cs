@@ -77,6 +77,23 @@ public class Controler : MonoBehaviour {
         countStars++;
         compleatedStartInUI?.Invoke(countStars);
     }
+    public void OnPauseGame() {
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PAUSE);
+        Time.timeScale = 0f;
+    }
+    public void OnContinueGame() {
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
+        Time.timeScale = 1f;
+    }
+    public void OnRestartGame() {
+        ManagerScenes.RestartLevel();
+    }
+    public void OnExitGame() {
+        ManagerScenes.ExitToHomeScreen();
+    }
+    public void OnNextLevel() {
+        ManagerScenes.NextLevel();
+    }
     public void OnInteractComputer() {
         StartCoroutine(LevelComplete());
     }

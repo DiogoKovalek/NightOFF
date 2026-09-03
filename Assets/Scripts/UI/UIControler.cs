@@ -31,6 +31,20 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private float starTimeToDecrease = 0.5f;
     [SerializeField] private GameObject TextClickToContinue;
     [SerializeField] private float textDelayShining = 0.8f;
+
+
+    #region EVENTS
+    public delegate void PausedGame();
+    public event PausedGame pausedGame;
+    public delegate void ContinuedGame();
+    public event ContinuedGame continuedGame;
+    public delegate void RestartedGame();
+    public event RestartedGame restartedGame;
+    public delegate void ExitedGame();
+    public event ExitedGame exitedGame;
+    public delegate void NextedLevel();
+    public event NextedLevel nextedLevel;
+    #endregion
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -48,19 +62,17 @@ public class UIControler : MonoBehaviour {
     }
     public void OnPauseGame() {
         pauseMenu.SetActive(true);
-        InputManager.inputManager.TradeActionMap(ACTION_MAP.PAUSE);
-        Time.timeScale = 0f;
+        pausedGame?.Invoke();
     }
     public void OnContinueGame() {
         pauseMenu.SetActive(false);
-        InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
-        Time.timeScale = 1f;
+        continuedGame?.Invoke();
     }
     public void OnRestartGame() {
-        ManagerScenes.RestartLevel();
+        restartedGame?.Invoke();
     }
     public void OnExitGame() {
-        ManagerScenes.ExitToHomeScreen();
+        exitedGame?.Invoke();
     }
 
     #region EVENTS
@@ -137,9 +149,9 @@ public class UIControler : MonoBehaviour {
         }
 
         //Inicia a animacao da barra escura
-        
+
         //Troca nivel
-        ManagerScenes.NextLevel();
+        nextedLevel?.Invoke();
     }
     private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
