@@ -215,7 +215,7 @@ public class UIControler : MonoBehaviour {
         //Inicia a animacao da barra escura
 
         //Troca nivel
-        nextedLevel?.Invoke();
+        StartCoroutine(slideBlackScreen(() => nextedLevel?.Invoke()));
     }
     private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
