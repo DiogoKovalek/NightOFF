@@ -29,6 +29,8 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private float starGrowScale = 1.4f;
     [SerializeField] private float starTimeToGrow = 0.5f;
     [SerializeField] private float starTimeToDecrease = 0.5f;
+    [SerializeField] private GameObject TextClickToContinue;
+    [SerializeField] private float textDelayShining = 0.8f;
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
         // caso queira exatamente o numero de shifts, substitua numCountes por numShifts
@@ -91,6 +93,7 @@ public class UIControler : MonoBehaviour {
     private IEnumerator levelCompleteTrasition(byte numStars) {
         //Desativa tudo
         BlackBG.gameObject.SetActive(false);
+        TextClickToContinue.SetActive(false);
         foreach(RectTransform star in Stars) {
             star.gameObject.SetActive(false);
         }
@@ -127,6 +130,10 @@ public class UIControler : MonoBehaviour {
             }
             yield return new WaitForSeconds(starsDelayToShow);
         }
+
+        //Mostra Texto
+        StartCoroutine(shiningObject(TextClickToContinue, textDelayShining));
+
     }
     private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
@@ -158,6 +165,12 @@ public class UIControler : MonoBehaviour {
         yield return null;
 
         if(repeat) StartCoroutine(animationGrowDecrease(rect, maxScale, timerToGrow, timerToDecrease, repeat));
+    }
+
+    private IEnumerator shiningObject(GameObject obj, float timeDelay, bool repeat = true) {
+        obj.SetActive(!obj.activeSelf);
+        yield return new WaitForSeconds(timeDelay);
+        if(repeat) StartCoroutine(shiningObject(obj, timeDelay, repeat));
     }
     #endregion
 }

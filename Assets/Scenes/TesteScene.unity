@@ -3407,7 +3407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &322399277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8849,6 +8849,8 @@ MonoBehaviour:
   starGrowScale: 1.5
   starTimeToGrow: 0.4
   starTimeToDecrease: 0.4
+  TextClickToContinue: {fileID: 2107740265}
+  textDelayShining: 0.9
 --- !u!1 &1002908224
 GameObject:
   m_ObjectHideFlags: 0
