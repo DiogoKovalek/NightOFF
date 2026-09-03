@@ -31,16 +31,15 @@ public class PowerCableDevice : MonoBehaviour {
                 foreach(var i in listIcons) {
                     if(!i.IsActive()){
                         icon = i;
-                        continue;
+                        break;
                     }
                 }
                 if(icon == null){
-                    Debug.Log(startP.localPosition);
-                    GameObject obj = Instantiate(prefIconEnergy, startP.localPosition, prefIconEnergy.transform.rotation, listOfIcons);
+                    GameObject obj = Instantiate(prefIconEnergy, startP.position, prefIconEnergy.transform.rotation, listOfIcons);
                     icon = obj.GetComponent<IconMovePowerCable>();
                     listIcons.Add(icon);
                 }
-                icon.StartMovement(startP.localPosition, endP.localPosition, curveP.localPosition, speedIcons);
+                icon.StartMovement(startP.position, endP.position, curveP.position, speedIcons);
             }
         }
     }
