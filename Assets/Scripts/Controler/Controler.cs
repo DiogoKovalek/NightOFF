@@ -91,13 +91,6 @@ public class Controler : MonoBehaviour {
 
         //Exibe a tela de level complete
         levelCompletedUI?.Invoke((byte) countStars);
-        
-        //Espera o comando do jogador
-
-        //Espera a tela sumir para depois trocar de scena
-
-        //ManagerScenes.NextLevel();
-        Debug.Log("Passou de fase");
     }
     public void OnPlayerMove() {
         contShifts++;

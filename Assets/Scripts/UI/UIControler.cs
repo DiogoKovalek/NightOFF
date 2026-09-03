@@ -50,20 +50,16 @@ public class UIControler : MonoBehaviour {
         pauseMenu.SetActive(true);
         InputManager.inputManager.TradeActionMap(ACTION_MAP.PAUSE);
         Time.timeScale = 0f;
-        Debug.Log("Pause");
     }
     public void OnContinueGame() {
         pauseMenu.SetActive(false);
         InputManager.inputManager.TradeActionMap(ACTION_MAP.PLAYER);
         Time.timeScale = 1f;
-        Debug.Log("Continue");
     }
     public void OnRestartGame() {
-        Debug.Log("Restart");
         ManagerScenes.RestartLevel();
     }
     public void OnExitGame() {
-        Debug.Log("Exit");
         ManagerScenes.ExitToHomeScreen();
     }
 
@@ -134,6 +130,16 @@ public class UIControler : MonoBehaviour {
         //Mostra Texto
         StartCoroutine(shiningObject(TextClickToContinue, textDelayShining));
 
+        bool clickToContinue = false;
+        while (!clickToContinue) {
+            clickToContinue = InputManager.inputManager.GetCliclToContinue();
+            yield return null;
+        }
+
+        //Inicia a animacao da barra escura
+        
+        //Troca nivel
+        ManagerScenes.NextLevel();
     }
     private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
