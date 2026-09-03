@@ -5,11 +5,13 @@ using UnityEngine;
 public class Cloud : MonoBehaviour, IMovable {
     private float speed;
     private Vector2 direction;
+    private float limit;
     private bool isFreeForMove = false;
 
     void Update() {
         if (isFreeForMove) {
             transform.position = (Vector2) transform.position + speed * direction * Time.deltaTime;
+            if(transform.position.x <= limit) gameObject.SetActive(false);
         }
     }
 
@@ -21,5 +23,8 @@ public class Cloud : MonoBehaviour, IMovable {
     }
     public void SetSpeed(float value) {
         speed = value;
+    }
+    public void SetLimit(float value) {
+        limit = value;
     }
 }

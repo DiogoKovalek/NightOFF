@@ -6552,8 +6552,8 @@ MonoBehaviour:
   spawnAreaUpRight: {x: 12.5, y: 4.2}
   minQuantPrefab: 2
   maxQuantPrefab: 6
-  minSpeedSpawn: 1
-  maxSpeedSpawn: 1.5
+  minTimeSpawn: 0.5
+  maxTimeSpawn: 5
   minSpeedPrefab: 1.5
   maxSpeedPrefab: 2.5
   minScalePrefab: 0.7

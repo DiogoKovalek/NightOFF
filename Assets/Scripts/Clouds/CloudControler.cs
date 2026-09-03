@@ -14,24 +14,24 @@ public class CloudControler : MonoBehaviour {
     [SerializeField] private int minQuantPrefab = 2;
     [SerializeField] private int maxQuantPrefab = 6;
     // speed spawn
-    [SerializeField] private float minSpeedSpawn = 1;
-    [SerializeField] private float maxSpeedSpawn = 1.5f;
+    [SerializeField] private float minTimeSpawn = 1;
+    [SerializeField] private float maxTimeSpawn = 1.5f;
 
     [Header("Atributes Prefab")]
     // speed prefab
-    [SerializeField] private float minSpeedPrefab = 3;
-    [SerializeField] private float maxSpeedPrefab = 10;
+    [SerializeField] private float minSpeedPrefab = 1.5f;
+    [SerializeField] private float maxSpeedPrefab = 2.5f;
     // size prefab
-    [SerializeField] private float minScalePrefab = 0.8f;
-    [SerializeField] private float maxScalePrefab = 1.3f;
+    [SerializeField] private float minScalePrefab = 0.7f;
+    [SerializeField] private float maxScalePrefab = 1.1f;
     // alpha prefab
-    [SerializeField] private byte minAlphaPrefab = 230;
+    [SerializeField] private byte minAlphaPrefab = 200;
     [SerializeField] private byte maxAlphaPrefab = 255;
 
     //Controle
     private List<GameObject> listClouds = new List<GameObject>();
     private Vector2 position = Vector2.zero;
-    private float speedSpawn = 0;
+    private float timeSpawn = 0;
     private float speedfPref = 0;
     private float scalePref = 1;
     private float alphaPref = 1;
@@ -39,15 +39,21 @@ public class CloudControler : MonoBehaviour {
     void Start() {
         // Spawnar em pontos aleatorios para comecar
         int aux = Random.Range(minQuantPrefab, maxQuantPrefab + 1);
-        Debug.Log(aux);
         for(int i = 0; i < aux; i++) {
             randomlyAtribute(true);
             spawnPrefab<Cloud>(position, Vector2.left, speedfPref, scalePref, alphaPref);
         }
+
+        StartCoroutine(loopSpawn());
     }
 
     private IEnumerator loopSpawn() {
-        yield return null;
+        while (true) {
+            timeSpawn = Random.Range(minTimeSpawn, maxTimeSpawn);
+            yield return new WaitForSeconds(timeSpawn);
+            randomlyAtribute(false);
+            spawnPrefab<Cloud>(position, Vector2.left, speedfPref, scalePref, alphaPref);
+        }
     }
 
     private void randomlyAtribute(bool isStart) {
@@ -67,10 +73,16 @@ public class CloudControler : MonoBehaviour {
     private void spawnPrefab<T>(Vector2 position, Vector2 direction, float speed, float scale, float alpha)
     where T : IMovable {
         GameObject obj = getPrefDisable();
-        if (obj == null && listClouds.Count < maxQuantPrefab) {
+        if (obj == null && listClouds.Count < maxQuantPrefab) { // Cria novo
             obj = Instantiate(prefabCloud, position, prefabCloud.transform.rotation, this.transform);
             listClouds.Add(obj);
         }
+        else if (obj != null){ // Reinstancia
+            obj.transform.position = position;
+            obj.SetActive(true);
+        }
+        else return;
+        
         obj.transform.localScale = obj.transform.localScale * scale;
         SpriteRenderer sprRen = obj.GetComponent<SpriteRenderer>();
         if (sprRen != null) {
@@ -82,6 +94,7 @@ public class CloudControler : MonoBehaviour {
         scr?.SetSpeed(speed);
         scr?.SetDirection(direction);
         scr?.Movement(true);
+        scr?.SetLimit(spawnAreaDownLeft.x);
     }
     private GameObject getPrefDisable() {
         foreach (GameObject obj in listClouds) {
