@@ -27,5 +27,10 @@ public class Placas : MonoBehaviour
             luz.EnableStaticColor(false);
         }
     }
+    public void TrocarTodasCores(COR_LUZ cor) {
+        foreach(var luz in listLuzes) {
+            luz.SwitchColor(cor);
+        }
+    }
     #endregion
 }

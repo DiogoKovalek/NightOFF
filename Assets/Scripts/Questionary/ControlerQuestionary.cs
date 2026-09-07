@@ -42,7 +42,8 @@ public class ControlerQuestionary : MonoBehaviour
         selectAnswer = InputManager.inputManager.GetClickToSelectAnswer();
 
         if (selectAnswer) {
-            Debug.Log($"Selecionado {SelectIndex}");
+            bool isCorrect = checkIfCorrect();
+            Debug.Log(isCorrect);
         }
         if(direction != 0) {
             navigationQuestion();
@@ -75,6 +76,16 @@ public class ControlerQuestionary : MonoBehaviour
 
             if(i == 0) placasResposta[indexToWrite].SetIsCorrect(true);
         }
+    }
+    private bool checkIfCorrect() {
+        bool correct = false;
+        for(int i = 0; i < placasResposta.Length; i++) {
+            bool isCorrect = placasResposta[i].GetIsCorrect();
+            placasResposta[i].TrocarTodasCores(isCorrect ? COR_LUZ.VERDE : COR_LUZ.VERMELHO);
+            placasResposta[i].AscenderTodasAsLuzes();
+            if(i == SelectIndex) correct = isCorrect;
+        }
+        return correct;
     }
 
     private void navigationQuestion() { // Não esta flexivel para qualquer grupo de questoes
