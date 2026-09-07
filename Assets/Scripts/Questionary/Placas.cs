@@ -17,9 +17,14 @@ public class Placas : MonoBehaviour
     }
 
     #region Luz controler
-    public void AscenderTodasAsLuzes(LuzPlaca[] luzes) {
-        foreach(var luz in luzes) {
+    public void AscenderTodasAsLuzes() {
+        foreach(var luz in listLuzes) {
             luz.EnableStaticColor(true);
+        }
+    }
+    public void ApagarTodasAsLuzes() {
+        foreach(var luz in listLuzes) {
+            luz.EnableStaticColor(false);
         }
     }
     #endregion
