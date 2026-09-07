@@ -1,21 +1,39 @@
 {
     "perguntas": [
         {
-            "enunciado": "Pergunta1",
+            "enunciado": "Por que dizemos que a energia solar é uma energia \"renovável\"",
             "alternativas": [
-                "Res1",
-                "Res2",
-                "Res3",
-                "Res4"
+                "Porque o Sol brilha todos os dias e nunca vai se esgotar para nósQues",
+                "Porque a gente precisa trocar as placas solares toda semana na feira",
+                "Porque ela só funciona perfeitamente quando está chovendo muito",
+                "Porque ela pode ser guardada em garrafas PET por 100 anos"
             ]
         },
         {
-            "enunciado": "Pergunta2",
+            "enunciado": "Como o uso da energia solar ajuda a proteger os animais e as plantas do nosso planeta?",
             "alternativas": [
-                "Res2",
-                "Res1",
-                "Res3",
-                "Res4"
+                "Evitando que a gente queime combustíveis que esquentam e poluem a Terra",
+                "Fazendo chover doce e suco de uva toda terça-feira",
+                "Espantando os dinossauros que ainda andam escondidos pelas matas",
+                "Desligando o Sol à noite para ele descansar bastante"
+            ]
+        },
+        {
+            "enunciado": "Se estiver um dia nublado ou de noite, o que acontece com a produção de energia solar?",
+            "alternativas": [
+                "Eles produzem menos energia ou usam baterias que guardaram a luz de antes",
+                "Eles produzem super energia com a luz das estrelas",
+                "Eles viram abóboras mágicas e somem",
+                "Eles pegam um avião e viajam para a praia"
+            ]
+        },
+        {
+            "enunciado": "Algumas calculadoras de bolso ou luzes de jardim funcionam sem tomada e sem pilha comum, usando apenas uma marquinha escura. Qual é o nome dessa tecnologia que usa a luz do Sol?",
+            "alternativas": [
+                "Célula fotovoltaica ou solar",
+                "Tecnologia de raios-X e visão noturna",
+                "Tecnologia magnética de foguete espacial",
+                "Bateria mágica feita de limão espremido"
             ]
         }
     ]
