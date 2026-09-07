@@ -12,35 +12,13 @@ public class ControlerQuestionary : MonoBehaviour
     [SerializeField] private String nomeArquivoJSON;
 
     [Header("Placas")]
-    [SerializeField] private GameObject PlacaPergunta;
-    [SerializeField] private GameObject[] PlacaRespostas;
-    //Lista de luz
-    private LuzPlaca[] listLuzesPlacaPergunta;
-    private LuzPlaca[][] listLuzesPlaca;
-    //Lista de textos
-    private TextMeshPro perguntaText;
-    private TextMeshPro[] respostasText;
-
+    [SerializeField] private PlacaPergunta placaPergunta;
+    [SerializeField] private PlacaResposta[] placasResposta;
     [Header("Config")]
     private Question openQuestion;
     private int indexCorrect;
 
     void Awake(){
-        //Placa Pergunta
-        if(PlacaPergunta != null){ 
-            listLuzesPlacaPergunta = PlacaPergunta.GetComponentsInChildren<LuzPlaca>();
-            perguntaText = PlacaPergunta.GetComponentInChildren<TextMeshPro>();
-        }
-
-        //Placa Resposta
-        listLuzesPlaca = new LuzPlaca[PlacaRespostas.Length][];
-        respostasText = new TextMeshPro[PlacaRespostas.Length];
-        for(int i = 0; i < PlacaRespostas.Length; i++) {
-            if(PlacaRespostas[i] == null) continue;
-            listLuzesPlaca[i] = PlacaRespostas[i].GetComponentsInChildren<LuzPlaca>();
-            respostasText[i] = PlacaRespostas[i].GetComponentInChildren<TextMeshPro>();
-
-        }
         CarregarJSON(nomeArquivoJSON);
         openQuestion = sortearQuestion();
         escreverAsQuestoes();
@@ -48,23 +26,7 @@ public class ControlerQuestionary : MonoBehaviour
 
     void Start() {
 
-        //Teste de luz =========================================================
-        foreach(var luz in listLuzesPlaca[1])luz.SwitchColor(COR_LUZ.AMARELO);
-        foreach(var luz in listLuzesPlaca[2])luz.SwitchColor(COR_LUZ.VERDE);
-        foreach(var luz in listLuzesPlaca[3])luz.SwitchColor(COR_LUZ.VERMELHO);
-        AscenderTodasAsLuzes(listLuzesPlacaPergunta);
-        foreach(var listLuz in listLuzesPlaca)AscenderTodasAsLuzes(listLuz);
-        //======================================================================
-
-        //Teste de Text ========================================================
-        /*
-        perguntaText.text = "Pergunta";
-        respostasText[0].text = "Resposta 1";
-        respostasText[1].text = "Resposta 2";
-        respostasText[2].text = "Resposta 3";
-        respostasText[3].text = "Resposta 4";
-        */
-        //======================================================================
+        
     }
 
     private void CarregarJSON(String nomeArquivoJSON) {
@@ -83,23 +45,17 @@ public class ControlerQuestionary : MonoBehaviour
         return ListQuestions.listQuestion[UnityEngine.Random.Range(0,ListQuestions.listQuestion.Count)];
     }
     private void escreverAsQuestoes() {
-        perguntaText.text = openQuestion.enunciado;
+        placaPergunta.Sobrescrever(openQuestion.enunciado);
         List<int> positionsFree = new List<int>() {0,1,2,3};
         for(int i = 0; i < openQuestion.alternativas.Length; i++) {
             int randomListIndex = UnityEngine.Random.Range(0, positionsFree.Count);
             int indexToWrite = positionsFree[randomListIndex];
             positionsFree.RemoveAt(randomListIndex);
-            respostasText[indexToWrite].text = openQuestion.alternativas[i];
-            
+            placasResposta[indexToWrite].Sobrescrever(openQuestion.alternativas[i]);
+
             if(i == 0) indexCorrect = indexToWrite;
         }
     }
 
-    #region Luz controler
-    private void AscenderTodasAsLuzes(LuzPlaca[] luzes) {
-        foreach(var luz in luzes) {
-            luz.EnableStaticColor(true);
-        }
-    }
-    #endregion
+    
 }

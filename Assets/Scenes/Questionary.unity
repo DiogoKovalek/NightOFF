@@ -1246,6 +1246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 153429104}
   - component: {fileID: 153429105}
+  - component: {fileID: 153429106}
   m_Layer: 0
   m_Name: Placa 1
   m_TagString: Untagged
@@ -1322,6 +1323,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &153429106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153429103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f97e9d78a781241a8392c86713bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &178632663
 GameObject:
   m_ObjectHideFlags: 0
@@ -10458,6 +10471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014623478}
   - component: {fileID: 1014623479}
+  - component: {fileID: 1014623480}
   m_Layer: 0
   m_Name: PlacaPergunta
   m_TagString: Untagged
@@ -10534,6 +10548,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1014623480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014623477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341d63e3972ef41468a73b3b9597e92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1015401486
 GameObject:
   m_ObjectHideFlags: 0
@@ -10544,6 +10570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1015401487}
   - component: {fileID: 1015401488}
+  - component: {fileID: 1015401489}
   m_Layer: 0
   m_Name: Placa 3
   m_TagString: Untagged
@@ -10620,6 +10647,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1015401489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015401486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f97e9d78a781241a8392c86713bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1030737772
 GameObject:
   m_ObjectHideFlags: 0
@@ -13571,6 +13610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1523530765}
   - component: {fileID: 1523530766}
+  - component: {fileID: 1523530767}
   m_Layer: 0
   m_Name: Placa 2
   m_TagString: Untagged
@@ -13647,6 +13687,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1523530767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523530764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f97e9d78a781241a8392c86713bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1531978455
 GameObject:
   m_ObjectHideFlags: 0
@@ -18279,12 +18331,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nomeArquivoJSON: Questions
-  PlacaPergunta: {fileID: 1014623477}
-  PlacaRespostas:
-  - {fileID: 153429103}
-  - {fileID: 1523530764}
-  - {fileID: 1015401486}
-  - {fileID: 2070528014}
+  placaPergunta: {fileID: 1014623480}
+  placasResposta:
+  - {fileID: 153429106}
+  - {fileID: 1523530767}
+  - {fileID: 1015401489}
+  - {fileID: 2070528017}
 --- !u!4 &1915059445
 Transform:
   m_ObjectHideFlags: 0
@@ -19903,6 +19955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2070528015}
   - component: {fileID: 2070528016}
+  - component: {fileID: 2070528017}
   m_Layer: 0
   m_Name: Placa 4
   m_TagString: Untagged
@@ -19979,6 +20032,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2070528017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070528014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f97e9d78a781241a8392c86713bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2074484175
 GameObject:
   m_ObjectHideFlags: 0
