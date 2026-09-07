@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +21,10 @@ public class ControlerQuestionary : MonoBehaviour
     private TextMeshPro perguntaText;
     private TextMeshPro[] respostasText;
 
+    [Header("Config")]
+    private Question openQuestion;
+    private int indexCorrect;
+
     void Awake(){
         //Placa Pergunta
         if(PlacaPergunta != null){ 
@@ -38,6 +42,8 @@ public class ControlerQuestionary : MonoBehaviour
 
         }
         CarregarJSON(nomeArquivoJSON);
+        openQuestion = sortearQuestion();
+        escreverAsQuestoes();
     }
 
     void Start() {
@@ -51,13 +57,14 @@ public class ControlerQuestionary : MonoBehaviour
         //======================================================================
 
         //Teste de Text ========================================================
+        /*
         perguntaText.text = "Pergunta";
         respostasText[0].text = "Resposta 1";
         respostasText[1].text = "Resposta 2";
         respostasText[2].text = "Resposta 3";
         respostasText[3].text = "Resposta 4";
+        */
         //======================================================================
-
     }
 
     private void CarregarJSON(String nomeArquivoJSON) {
@@ -70,6 +77,21 @@ public class ControlerQuestionary : MonoBehaviour
         }
         else {
             Debug.LogError($"Arquivo {nomeArquivoJSON} não foi encontrado");
+        }
+    }
+    private Question sortearQuestion() {
+        return ListQuestions.listQuestion[UnityEngine.Random.Range(0,ListQuestions.listQuestion.Count)];
+    }
+    private void escreverAsQuestoes() {
+        perguntaText.text = openQuestion.enunciado;
+        List<int> positionsFree = new List<int>() {0,1,2,3};
+        for(int i = 0; i < openQuestion.alternativas.Length; i++) {
+            int randomListIndex = UnityEngine.Random.Range(0, positionsFree.Count);
+            int indexToWrite = positionsFree[randomListIndex];
+            positionsFree.RemoveAt(randomListIndex);
+            respostasText[indexToWrite].text = openQuestion.alternativas[i];
+            
+            if(i == 0) indexCorrect = indexToWrite;
         }
     }
 
