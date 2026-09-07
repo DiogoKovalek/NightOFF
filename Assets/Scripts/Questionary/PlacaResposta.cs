@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlacaResposta : Placas
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool isCorrect = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public bool GetIsCorrect() {
+        return isCorrect;
+    }
+    public void SetIsCorrect(bool isCorrect) {
+        this.isCorrect = isCorrect;
     }
 }

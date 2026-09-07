@@ -16,9 +16,10 @@ public class ControlerQuestionary : MonoBehaviour
     [SerializeField] private PlacaResposta[] placasResposta;
     [Header("Config")]
     private Question openQuestion;
-    private int indexCorrect;
 
     void Awake(){
+        //Necessita ter um action Map
+        InputManager.inputManager.TradeActionMap(ACTION_MAP.MINI_GAME);
         CarregarJSON(nomeArquivoJSON);
         openQuestion = sortearQuestion();
         escreverAsQuestoes();
@@ -53,7 +54,7 @@ public class ControlerQuestionary : MonoBehaviour
             positionsFree.RemoveAt(randomListIndex);
             placasResposta[indexToWrite].Sobrescrever(openQuestion.alternativas[i]);
 
-            if(i == 0) indexCorrect = indexToWrite;
+            if(i == 0) placasResposta[indexToWrite].SetIsCorrect(true);
         }
     }
 
