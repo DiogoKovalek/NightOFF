@@ -8819,7 +8819,7 @@ MonoBehaviour:
   starTimeToDecrease: 0.4
   TextClickToContinue: {fileID: 2107740265}
   textDelayShining: 0.9
-  sliderBackground: {fileID: 0}
+  sliderBackground: {fileID: 974341198}
 --- !u!114 &974341198
 MonoBehaviour:
   m_ObjectHideFlags: 0
