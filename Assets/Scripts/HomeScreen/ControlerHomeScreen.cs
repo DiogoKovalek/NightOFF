@@ -14,10 +14,49 @@ public class ControlerHomeScreen : MonoBehaviour {
     private bool isFreeForStart = true;
     private bool isClickToStartGame = false;
 
+    [Header("Devices")]
+    [SerializeField] private GameObject devices;
+    [SerializeField] private GameObject powerCables;
+    [SerializeField] private GameObject solarPanels;
+    private Device[] listDevices;
+    private PowerCableDevice[] listPowerCable;
+    private SolarPanel[] listSolarPanel;
+
+    #region EVENTS
+    public delegate void DeviceSwitched(bool isDay);
+    public event DeviceSwitched deviceSwitched;
+    #endregion
+    void Awake() {
+        conectEvents();
+    }
+    private void conectEvents() {
+        if(devices != null) listDevices = devices?.GetComponentsInChildren<Device>();
+        if(powerCables != null) listPowerCable = powerCables?.GetComponentsInChildren<PowerCableDevice>();
+        if(solarPanels != null) listSolarPanel = solarPanels?.GetComponentsInChildren<SolarPanel>();
+
+        if(listDevices != null){
+            foreach(var dev in listDevices){
+                deviceSwitched += dev.OnDeviceSwitch;
+            }
+        }
+        if(listPowerCable != null){
+            foreach(var pow in listPowerCable) {
+                deviceSwitched += pow.OnDeviceSwitch;
+            }
+        }
+        if(listDevices != null) {
+            foreach (var sol in listSolarPanel) {
+               deviceSwitched += sol.OnDeviceSwitch; 
+            }
+        }
+    }
+
     void Start() {
         InputManager.inputManager.TradeActionMap(ACTION_MAP.MENU);
         sliderBackground?.StartSlide();
         if (panelPressEnter != null) StartCoroutine(shiningPressEnter());
+
+        deviceSwitched?.Invoke(true);
     }
 
     void Update() {
