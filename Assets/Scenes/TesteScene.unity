@@ -8691,6 +8691,7 @@ GameObject:
   - component: {fileID: 974341194}
   - component: {fileID: 974341193}
   - component: {fileID: 974341197}
+  - component: {fileID: 974341198}
   m_Layer: 5
   m_Name: CanvasGame
   m_TagString: Untagged
@@ -8818,8 +8819,21 @@ MonoBehaviour:
   starTimeToDecrease: 0.4
   TextClickToContinue: {fileID: 2107740265}
   textDelayShining: 0.9
+  sliderBackground: {fileID: 0}
+--- !u!114 &974341198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974341192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df49ebefe4be3a6478496a12aaad4c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   BlackScreen: {fileID: 2135065313}
-  timeToSlide: 0.1
+  timeToSlide: 0.3
 --- !u!1 &1002908224
 GameObject:
   m_ObjectHideFlags: 0

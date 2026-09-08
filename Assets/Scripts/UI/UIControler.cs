@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+
 using UnityEngine.Events;
 
 public class UIControler : MonoBehaviour {
@@ -38,11 +38,8 @@ public class UIControler : MonoBehaviour {
     [SerializeField] private GameObject TextClickToContinue;
     [SerializeField] private float textDelayShining = 0.8f;
 
-    [Header("BlackScreen")]
-    [SerializeField] private RectTransform BlackScreen;
-    [SerializeField] private float timeToSlide = 0.7f;
-    private bool isBlackScreenInCenter = true;
-    private float widthCanvas;
+    [Header("Slider")]
+    [SerializeField] private SliderBackground sliderBackground;
 
     #region EVENTS
     public delegate void PausedGame();
@@ -61,19 +58,11 @@ public class UIControler : MonoBehaviour {
         GameMenu.SetActive(true);
         LevelCompleteMenu.SetActive(false);
 
-        // BlackScreen Começa no centro da tela
-        BlackScreen.gameObject.SetActive(true);
-        BlackScreen.anchoredPosition = Vector3.zero;
-        isBlackScreenInCenter = true;
-
-        // Pegar tamanho do Canvas
-        CanvasScaler can = GetComponent<CanvasScaler>();
-        if(can != null) widthCanvas = can.referenceResolution.x;
-        else widthCanvas = 1920; // Padrao
+        if(sliderBackground == null) sliderBackground = this?.GetComponent<SliderBackground>();
     }
 
     void Start() {
-        StartCoroutine(slideBlackScreen());
+        sliderBackground?.StartSlide();
     }
     private void createCounterByShifts(byte numShifts) {
         int numCounters = numShifts - 1; 
@@ -100,45 +89,12 @@ public class UIControler : MonoBehaviour {
     }
     public void OnRestartGame() {
         continuedGame?.Invoke();
-        StartCoroutine(slideBlackScreen(() => restartedGame?.Invoke()));
+        sliderBackground?.StartSlide(() => restartedGame?.Invoke());
     }
     public void OnExitGame() {
         continuedGame?.Invoke();
-        StartCoroutine(slideBlackScreen(() => exitedGame?.Invoke()));
+        sliderBackground?.StartSlide(() => exitedGame?.Invoke());
     }
-
-    public IEnumerator slideBlackScreen(Action actionNext = null) {
-        float t = 0;
-        float startX = BlackScreen.anchoredPosition.x;
-        float endX = 0;
-        Vector3 position = Vector3.zero;
-
-        if (isBlackScreenInCenter) {// Centro para esquerda
-            startX = 0;
-            endX = -widthCanvas;
-            position.x = startX;
-            BlackScreen.anchoredPosition = position;
-        }
-        else {// Esquerda para Centro
-            startX = widthCanvas;
-            endX = 0;
-            position.x = startX;
-            BlackScreen.anchoredPosition = position;
-        }
-        while (t < timeToSlide) {
-            t += Time.deltaTime;
-            position.x = Mathf.Lerp(startX, endX, t/timeToSlide);
-            BlackScreen.anchoredPosition = position;
-            yield return null;
-        }
-        position.x = endX;
-        BlackScreen.anchoredPosition = position;
-
-        isBlackScreenInCenter = !isBlackScreenInCenter;
-        
-        actionNext?.Invoke();
-    }
-
     #region EVENTS
     public void OnCompleteStarInUI(byte index) {
         listStars[index-1].EnableStar();
@@ -215,7 +171,7 @@ public class UIControler : MonoBehaviour {
         //Inicia a animacao da barra escura
 
         //Troca nivel
-        StartCoroutine(slideBlackScreen(() => nextedLevel?.Invoke()));
+        sliderBackground?.StartSlide(() => nextedLevel?.Invoke());
     }
     private IEnumerator animationGrowDecrease(RectTransform rect, Vector3 maxScale, float timerToGrow, float timerToDecrease, bool repeat = false) {
         //=====================================
