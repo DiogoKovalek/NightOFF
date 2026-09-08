@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6188273902083425913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6950018796558741579}
+  - component: {fileID: 1388490014077966160}
+  m_Layer: 0
+  m_Name: CloudsControler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6950018796558741579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188273902083425913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1388490014077966160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188273902083425913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffe00f77a0d33e408f25bd34c35f34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabCloud: {fileID: 3470071964884860682, guid: d0a225eff9c993b4a989b53c78631a16, type: 3}
+  spawnAreaDownLeft: {x: -12.5, y: 1}
+  spawnAreaUpRight: {x: 12.5, y: 4.2}
+  minQuantPrefab: 2
+  maxQuantPrefab: 6
+  minTimeSpawn: 0.5
+  maxTimeSpawn: 5
+  minSpeedPrefab: 1.5
+  maxSpeedPrefab: 2.5
+  minScalePrefab: 0.7
+  maxScalePrefab: 1.1
+  minAlphaPrefab: 200
+  maxAlphaPrefab: 255
