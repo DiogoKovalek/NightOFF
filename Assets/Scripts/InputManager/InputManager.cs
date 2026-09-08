@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour {
     private byte moveDirection = 0; // 0:NULL 1:UP 2:RIGHT 3:DOWN 4:LEFT
     private bool clickToContinue = false;
     private bool clickToSelectAnswer = false;
+    private bool clickToStartGame = false;
 
     #region TOUCH CONTROLS
     private Vector2 startPosition;
@@ -66,6 +67,9 @@ public class InputManager : MonoBehaviour {
     public void OnClickToContinue() {
         clickToContinue = true;
     }
+    public void OnStartGame() {
+        clickToStartGame = true;
+    }
     public void OnNavigation(InputValue value) {
         Vector2 vetor = value.Get<Vector2>().normalized;
 
@@ -92,6 +96,11 @@ public class InputManager : MonoBehaviour {
     public bool GetClickToSelectAnswer() {
         bool value = clickToSelectAnswer;
         clickToSelectAnswer = false;
+        return value;
+    }
+    public bool GetClickToStartGame() {
+        bool value = clickToStartGame;
+        clickToStartGame = false;
         return value;
     }
     public void TradeActionMap(ACTION_MAP actionMap) {
