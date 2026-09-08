@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ControlerHomeScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Slider Background")]
+    [SerializeField] private SliderBackground sliderBackground;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Start() {
+        sliderBackground?.StartSlide();
     }
 }
