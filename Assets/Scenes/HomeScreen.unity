@@ -2810,6 +2810,8 @@ MonoBehaviour:
   devices: {fileID: 1626055365}
   powerCables: {fileID: 1155221797}
   solarPanels: {fileID: 1778409981}
+  initDay: 1
+  Background: {fileID: 2105448760}
 --- !u!4 &1066021875
 Transform:
   m_ObjectHideFlags: 0
@@ -6482,6 +6484,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2105448760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5150380434990075730, guid: f1dde3a89aab46f4bbd12ac9645de65f, type: 3}
+  m_PrefabInstance: {fileID: 386302570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2114341964
 GameObject:
   m_ObjectHideFlags: 0
