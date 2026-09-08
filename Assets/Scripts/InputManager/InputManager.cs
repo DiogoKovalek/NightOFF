@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour {
     private PlayerInput playerInput;
     private byte moveDirection = 0; // 0:NULL 1:UP 2:RIGHT 3:DOWN 4:LEFT
     private bool clickToContinue = false;
+    private bool clickToSelectAnswer = false;
 
     #region TOUCH CONTROLS
     private Vector2 startPosition;
@@ -65,6 +66,19 @@ public class InputManager : MonoBehaviour {
     public void OnClickToContinue() {
         clickToContinue = true;
     }
+    public void OnNavigation(InputValue value) {
+        Vector2 vetor = value.Get<Vector2>().normalized;
+
+        if (vetor == Vector2.zero) {
+            moveDirection = 0;
+            return;
+        }
+
+        moveDirection = transformVector2InMoveDirection(vetor);
+    }
+    public void OnSelectAnswer() {
+        clickToSelectAnswer = true;
+    }
     public byte GetMoveDirection() {
         byte value = moveDirection;
         moveDirection = 0; // Sempre seta para 0 o valor do input para que nao se repita mais de uma vez
@@ -73,6 +87,11 @@ public class InputManager : MonoBehaviour {
     public bool GetCliclToContinue() {
         bool value = clickToContinue;
         clickToContinue = false;
+        return value;
+    }
+    public bool GetClickToSelectAnswer() {
+        bool value = clickToSelectAnswer;
+        clickToSelectAnswer = false;
         return value;
     }
     public void TradeActionMap(ACTION_MAP actionMap) {
