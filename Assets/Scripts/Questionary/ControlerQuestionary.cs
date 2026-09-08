@@ -14,6 +14,12 @@ public class ControlerQuestionary : MonoBehaviour
     [Header("Placas")]
     [SerializeField] private PlacaPergunta placaPergunta;
     [SerializeField] private PlacaResposta[] placasResposta;
+
+    [Header("Slider Bar")]
+    //Para transformar em asset, essa parte pode ser removida e depois
+    //removida toda parte que ela é chamada
+    [SerializeField] private SliderBackground sliderBackground;
+
     [Header("Config")]
     private Question openQuestion;
     private int SelectIndex = 0;
@@ -33,6 +39,8 @@ public class ControlerQuestionary : MonoBehaviour
         placasResposta[SelectIndex].AscenderTodasAsLuzes();
         escreverAsQuestoes();
         placaPergunta.AscenderTodasAsLuzes();
+
+        sliderBackground.StartSlide();
     }
 
     void Update() {

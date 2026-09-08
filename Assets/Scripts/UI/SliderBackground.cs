@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SliderBackground : MonoBehaviour {
     [Header("BlackScreen")]
     [SerializeField] private RectTransform BlackScreen;
-    [SerializeField] private float timeToSlide = 0.7f;
+    [SerializeField] private float timeToSlide = 0.3f;
     private bool isBlackScreenInCenter = true;
     private float widthCanvas;
 
@@ -33,6 +33,7 @@ public class SliderBackground : MonoBehaviour {
         float startX = BlackScreen.anchoredPosition.x;
         float endX = 0;
         Vector3 position = Vector3.zero;
+        BlackScreen.gameObject.SetActive(true);
 
         if (isBlackScreenInCenter) {// Centro para esquerda
             startX = 0;
@@ -56,6 +57,7 @@ public class SliderBackground : MonoBehaviour {
         BlackScreen.anchoredPosition = position;
 
         isBlackScreenInCenter = !isBlackScreenInCenter;
+        if(!isBlackScreenInCenter) BlackScreen.gameObject.SetActive(false);
 
         actionNext?.Invoke();
     }
