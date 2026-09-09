@@ -12,6 +12,7 @@ public class UIControler : MonoBehaviour {
 
     [Header("Stars")]
     [SerializeField] private UIStar[] listStars;
+    [SerializeField] private AudioClip starSFX;
 
     [Header("ShiftCounter")]
     [SerializeField] private GameObject shiftCounter;
@@ -154,6 +155,7 @@ public class UIControler : MonoBehaviour {
             StartCoroutine(animationGrowDecrease(star, star.localScale * starGrowScale, starTimeToGrow, starTimeToDecrease));
             if(numStars > countStars) {
                 countStars++;
+                AudioManager.audioManager.playSFX(starSFX);
                 star.gameObject?.GetComponent<UIStar>().EnableStar();
             }
             yield return new WaitForSeconds(starsDelayToShow);

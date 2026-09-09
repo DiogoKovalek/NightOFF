@@ -20,6 +20,9 @@ public class Controler : MonoBehaviour {
     private byte countStars = 0;
     #endregion
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip levelCompleteSFX;
+
     #region EVENTS
     public delegate void CompleatedStarInUI(byte index);
     public event CompleatedStarInUI compleatedStartInUI;
@@ -100,11 +103,12 @@ public class Controler : MonoBehaviour {
     private IEnumerator LevelComplete() {
         //Troca os inputs
         InputManager.inputManager.TradeActionMap(ACTION_MAP.LEVEL_COMPLETE);
+
         //Espera um tempo para a musica
+        AudioManager.audioManager.pauseMusic();
+        AudioManager.audioManager.playSFX(levelCompleteSFX);
 
-        //Toca musica
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         //Exibe a tela de level complete
         levelCompletedUI?.Invoke((byte) countStars);

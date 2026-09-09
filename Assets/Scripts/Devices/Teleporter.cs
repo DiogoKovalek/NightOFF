@@ -9,6 +9,9 @@ public class Teleporter : Device {
     private static bool inAreaOfTeleport = false;
     private static bool isTeleported = false;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip teleportSFX;
+
     void Awake() {
         // Checar se os teleportes estao linkados entre si
         if (destinationTeleport == null || destinationTeleport?.GetDestinationTeleport() != this) {
@@ -59,6 +62,7 @@ public class Teleporter : Device {
         }
 
         // Executa animacao de teleport
+        AudioManager.audioManager.playSFX(teleportSFX);
         Animator playerAnimator = player.GetPlayerAnimator();
         playerAnimator.SetTrigger("teleporting");
         yield return new WaitForSeconds(0.583f);
@@ -74,6 +78,7 @@ public class Teleporter : Device {
         yield return new WaitUntil(() => isTeleported); // Tentart depois um yield return null
 
         // Executa animacao de finalizar teleport
+        AudioManager.audioManager.playSFX(teleportSFX);
         playerAnimator.SetTrigger("teleporting");
         yield return new WaitForSeconds(0.583f);
         

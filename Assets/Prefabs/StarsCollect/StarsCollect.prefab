@@ -403,6 +403,7 @@ MonoBehaviour:
   isAnimationLerp: 1
   rayDistLerp: 0.3
   speedLerp: 1
+  collectSFX: {fileID: 8300000, guid: ff5d6f6ca6bdcc64db914123ead772aa, type: 3}
 --- !u!1 &2804525728379022904
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +489,7 @@ MonoBehaviour:
   isAnimationLerp: 1
   rayDistLerp: 0.3
   speedLerp: 1
+  collectSFX: {fileID: 8300000, guid: ff5d6f6ca6bdcc64db914123ead772aa, type: 3}
 --- !u!1 &3678012114796977331
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,3 +622,4 @@ MonoBehaviour:
   isAnimationLerp: 1
   rayDistLerp: 0.3
   speedLerp: 1
+  collectSFX: {fileID: 8300000, guid: ff5d6f6ca6bdcc64db914123ead772aa, type: 3}

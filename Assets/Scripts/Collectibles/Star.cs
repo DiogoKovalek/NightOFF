@@ -11,6 +11,9 @@ public class Star : MonoBehaviour, ICollect {
     private float t = 0;
     private Vector3 startPos;
     private Vector3 targetPos;
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip collectSFX;
     void Start() {
         startPos = spriteStar.transform.position;
         targetPos = startPos + Vector3.up * rayDistLerp;
@@ -24,6 +27,7 @@ public class Star : MonoBehaviour, ICollect {
         spriteStar.transform.position = Vector2.Lerp(startPos, targetPos, t);
     }
     public void collected(Player player) {
+        AudioManager.audioManager.playSFX(collectSFX);
         Destroy(this.gameObject);
     }
 

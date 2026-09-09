@@ -37,6 +37,12 @@ public class ControlerQuestionary : MonoBehaviour {
     private bool freeForNavigation = true;
     private bool isAbleEnter = false;
 
+    
+    [Header("SFX")]
+    [SerializeField] private AudioClip drunsSFX;
+    [SerializeField] private AudioClip aplausesSFX;
+    [SerializeField] private AudioClip loseSFX;
+
     void Awake() {
         //Necessita ter um action Map
         InputManager.inputManager.TradeActionMap(ACTION_MAP.MINI_GAME);
@@ -102,11 +108,16 @@ public class ControlerQuestionary : MonoBehaviour {
         }
     }
     private IEnumerator checkIfCorrect() {
+        //musica
+        AudioManager.audioManager.pauseMusic();
+        AudioManager.audioManager.playSFX(drunsSFX);
+
         bool isCorrect = false;
         //Ascender todas as luzes
         foreach (var placa in placasResposta) placa.AscenderTodasAsLuzes();
         yield return new WaitForSeconds(delaySuspense1);
 
+        AudioManager.audioManager.stopSFX();
         for (int i = 0; i < placasResposta.Length; i++) {
             placasResposta[i].ApagarTodasAsLuzes();
             bool auxCorrect = placasResposta[i].GetIsCorrect();
@@ -114,6 +125,10 @@ public class ControlerQuestionary : MonoBehaviour {
             if (i == SelectIndex) isCorrect = auxCorrect;
         }
         yield return new WaitForSeconds(delaySuspense2);
+
+        //SFX
+        if(isCorrect) AudioManager.audioManager.playSFX(aplausesSFX);
+        else AudioManager.audioManager.playSFX(loseSFX);
 
         foreach (var placa in placasResposta) placa.AscenderTodasAsLuzes();
         yield return new WaitForSeconds(delayForAbleEnter);

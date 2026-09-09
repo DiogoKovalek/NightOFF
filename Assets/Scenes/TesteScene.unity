@@ -5053,6 +5053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a374653418f415d41b329938353c1fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMusic: {fileID: 1989677994}
   audioSFX: {fileID: 1989677993}
 --- !u!82 &1989677993
 AudioSource:
@@ -5066,7 +5067,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5160,9 +5161,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 26fcbefc0ea5af64c82906cafc50f645, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1941b54be64747d4d91d54e761efbbb2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6121,6 +6122,10 @@ PrefabInstance:
       propertyPath: Background
       value: 
       objectReference: {fileID: 390907388}
+    - target: {fileID: 4109121168601515508, guid: b094d6fce5619e448bf32ac5be2c9a80, type: 3}
+      propertyPath: levelCompleteSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ac4d3cd4b195034286e96bfb230b526, type: 3}
     - target: {fileID: 8116220461217915665, guid: b094d6fce5619e448bf32ac5be2c9a80, type: 3}
       propertyPath: m_Name
       value: Controler
@@ -6256,6 +6261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862827296932684762, guid: 637565cebf165724ba88e01bc1ea58de, type: 3}
+      propertyPath: starSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ff5d6f6ca6bdcc64db914123ead772aa, type: 3}
     - target: {fileID: 1850975264210228109, guid: 637565cebf165724ba88e01bc1ea58de, type: 3}
       propertyPath: m_Pivot.x
       value: 0

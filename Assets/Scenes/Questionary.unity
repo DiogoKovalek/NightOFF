@@ -18170,7 +18170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -18266,6 +18266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a374653418f415d41b329938353c1fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMusic: {fileID: 1825455350}
   audioSFX: {fileID: 1825455352}
 --- !u!1 &1828887565
 GameObject:
@@ -18967,6 +18968,9 @@ MonoBehaviour:
   delaySuspense1: 2
   delaySuspense2: 0.3
   delayForAbleEnter: 1
+  drunsSFX: {fileID: 8300000, guid: b95875ed38d25674ea6d9b20640fe2d1, type: 3}
+  aplausesSFX: {fileID: 8300000, guid: 011281552ad6a844aa9fc95a21315302, type: 3}
+  loseSFX: {fileID: 8300000, guid: 0a95fab987eaa0041a517fc4c8c69c0f, type: 3}
 --- !u!4 &1915059445
 Transform:
   m_ObjectHideFlags: 0
