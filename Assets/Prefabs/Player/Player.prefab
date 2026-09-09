@@ -56,6 +56,11 @@ MonoBehaviour:
   jumpHeight: 0.5
   distPoints: 1
   speedMovement: 8
+  jumpSFX:
+  - {fileID: 8300000, guid: 2437c0f09c227ed4085004752d7e8857, type: 3}
+  - {fileID: 8300000, guid: 6cb061fe0b1027c4da80f545e7943127, type: 3}
+  - {fileID: 8300000, guid: a5428600976fa3b408f51055a8c961fe, type: 3}
+  collectStarSFX: {fileID: 8300000, guid: c8cdcbbbc71d1f54f8b73ede4116f918, type: 3}
 --- !u!50 &4136323074071091977
 Rigidbody2D:
   serializedVersion: 4

@@ -26,6 +26,9 @@ public class Player : MonoBehaviour {
     private Vector2 startMovePos;
     #endregion
 
+    [Header("Sounds SFX")]
+    [SerializeField] private AudioClip[] jumpSFX;
+    private int indexJump = 0;
     #region EVENTS
     public delegate void CollectedStar();
     public event CollectedStar collectedStar;
@@ -57,7 +60,9 @@ public class Player : MonoBehaviour {
         if (collision.gameObject.layer == 8) {
             ICollect collect = collision?.GetComponent<ICollect>();
             if (collect != null) {
-                if (collision.gameObject.CompareTag("StarCollect")) collectedStar?.Invoke();
+                if (collision.gameObject.CompareTag("StarCollect")) {
+                    collectedStar?.Invoke();
+                }
                 collect.collected(this);
             }
         }
@@ -89,6 +94,10 @@ public class Player : MonoBehaviour {
         }
         startMovePos = transform.position;
         isMoving = true;
+        //SFX
+        AudioManager.audioManager.playSFX(jumpSFX[indexJump]);
+        indexJump = indexJump + 1 < jumpSFX.Length ? indexJump + 1 : 0;
+
         playerAnimator.SetBool("isJumping", true);
         playerMoved?.Invoke();
     }
