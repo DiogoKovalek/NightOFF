@@ -659,6 +659,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ClickToContinue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8fe5f16-11ef-48ae-9b57-3249a3a27375"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ClickToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
