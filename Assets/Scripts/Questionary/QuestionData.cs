@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.VisualScripting;
 
 [Serializable]
 public class Question {
@@ -23,4 +25,17 @@ public class QuestionWrapper {
 
 public static class ListQuestions{
     public static List<Question> listQuestion;
+
+    public static Question ChangeQuestion(int index) {
+        Question q = listQuestion[index];
+        listQuestion.RemoveAt(index);
+        if(listQuestion.Count == 0) listQuestion = null;
+        return q;
+    }
+
+    public static void ClearList() {
+        if(listQuestion == null) return;
+        listQuestion.Clear();
+        listQuestion = null;
+    }
 }
