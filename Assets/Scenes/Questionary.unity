@@ -10293,6 +10293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlackScreen: {fileID: 2106307461}
   timeToSlide: 0.3
+  startSFX: {fileID: 8300000, guid: 252376f303a4e2e46b9f68964885bc13, type: 3}
+  endSFX: {fileID: 8300000, guid: 45290a7fb0875ad49b208dd8c36c47dc, type: 3}
 --- !u!114 &951722867
 MonoBehaviour:
   m_ObjectHideFlags: 0

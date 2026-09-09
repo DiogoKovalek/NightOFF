@@ -6265,6 +6265,14 @@ PrefabInstance:
       propertyPath: starSFX
       value: 
       objectReference: {fileID: 8300000, guid: ff5d6f6ca6bdcc64db914123ead772aa, type: 3}
+    - target: {fileID: 970870701297230143, guid: 637565cebf165724ba88e01bc1ea58de, type: 3}
+      propertyPath: endSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 45290a7fb0875ad49b208dd8c36c47dc, type: 3}
+    - target: {fileID: 970870701297230143, guid: 637565cebf165724ba88e01bc1ea58de, type: 3}
+      propertyPath: startSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 252376f303a4e2e46b9f68964885bc13, type: 3}
     - target: {fileID: 1850975264210228109, guid: 637565cebf165724ba88e01bc1ea58de, type: 3}
       propertyPath: m_Pivot.x
       value: 0
