@@ -119,7 +119,6 @@ public class InputManager : MonoBehaviour {
                 break;
             case ACTION_MAP.LEVEL_COMPLETE:
                 playerInput.SwitchCurrentActionMap("LevelComplete");
-                Debug.Log("Switch to Level Complete");
                 break;
         }
     }

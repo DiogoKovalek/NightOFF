@@ -11,7 +11,7 @@ public static class ManagerScenes {
 
     public static void NextLevel() {
         Time.timeScale = 1f;
-        if (!inQuestionary) {
+        if (!inQuestionary && numLevel != scenesLevel.Length) {
             inQuestionary = true;
             SceneManager.LoadScene(miniGameScreen);
         }
@@ -19,7 +19,7 @@ public static class ManagerScenes {
             inQuestionary = false;
             numLevel++;
             if (scenesLevel.Length < numLevel) ExitToHomeScreen();
-            SceneManager.LoadScene(scenesLevel[numLevel - 1]);
+            else SceneManager.LoadScene(scenesLevel[numLevel - 1]);
         }
     }
     public static void RestartLevel() {
@@ -29,11 +29,17 @@ public static class ManagerScenes {
     public static void ExitToHomeScreen() {
         Time.timeScale = 1f;
         numLevel = 0;
+        //Questionario
+        ListQuestions.ClearList();
+        
         SceneManager.LoadScene(sceneHomeScreen);
     }
     public static void StartGame() {
         Time.timeScale = 1f;
         numLevel = 1;
+        //Questionario
+        ListQuestions.ClearList();
+
         SceneManager.LoadScene(scenesLevel[numLevel - 1]);
     }
 }

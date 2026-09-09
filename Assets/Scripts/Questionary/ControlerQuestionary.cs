@@ -93,7 +93,8 @@ public class ControlerQuestionary : MonoBehaviour {
         }
     }
     private Question sortearQuestion() {
-        return ListQuestions.listQuestion[UnityEngine.Random.Range(0, ListQuestions.listQuestion.Count)];
+        Debug.Log(ListQuestions.listQuestion.Count);
+        return ListQuestions.ChangeQuestion(UnityEngine.Random.Range(0, ListQuestions.listQuestion.Count));
     }
     private void escreverAsQuestoes() {
         placaPergunta.Sobrescrever(openQuestion.enunciado);
