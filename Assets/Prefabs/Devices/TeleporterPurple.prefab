@@ -126,6 +126,7 @@ MonoBehaviour:
   iconUp: {fileID: 1229033552149142963}
   isActiveInDay: 1
   destinationTeleport: {fileID: 0}
+  teleportSFX: {fileID: 8300000, guid: 24b33f0a8a7feec42b7fa8014a8d3863, type: 3}
 --- !u!61 &8005808685751192910
 BoxCollider2D:
   m_ObjectHideFlags: 0

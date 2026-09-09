@@ -11,6 +11,10 @@ public class SliderBackground : MonoBehaviour {
     private bool isBlackScreenInCenter = true;
     private float widthCanvas;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip startSFX;
+    [SerializeField] private AudioClip endSFX;
+
     void Awake() {
         // BlackScreen Começa no centro da tela
         BlackScreen.gameObject.SetActive(true);
@@ -36,12 +40,14 @@ public class SliderBackground : MonoBehaviour {
         BlackScreen.gameObject.SetActive(true);
 
         if (isBlackScreenInCenter) {// Centro para esquerda
+            AudioManager.audioManager.playSFX(endSFX);
             startX = 0;
             endX = -widthCanvas;
             position.x = startX;
             BlackScreen.anchoredPosition = position;
         }
         else {// Esquerda para Centro
+            AudioManager.audioManager.playSFX(startSFX);
             startX = widthCanvas;
             endX = 0;
             position.x = startX;
